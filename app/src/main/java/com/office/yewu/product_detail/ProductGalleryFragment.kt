@@ -49,7 +49,7 @@ class ProductGalleryFragment : BaseFragment(), RVInterface {
 
         vpGallery.adapter = pagerAdapter
 
-        indicator.setRV(3).bindViewPager(vpGallery)
+        indicator.setDotNumber(3).bindViewPager(vpGallery)
 
     }
 

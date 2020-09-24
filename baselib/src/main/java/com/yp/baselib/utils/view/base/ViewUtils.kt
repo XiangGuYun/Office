@@ -12,6 +12,7 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.design.widget.TabLayout
 import android.support.v4.view.PagerAdapter
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -699,6 +700,29 @@ interface ViewUtils {
         setOnCheckedChangeListener { group, checkedId ->
             getId.invoke(checkedId)
         }
+    }
+
+    fun ViewPager.setViewAdapter(count:Int, getPageView:(pos:Int)->View){
+        val pagerAdapter: PagerAdapter = object : PagerAdapter() {
+            override fun getCount(): Int {
+                return count
+            }
+
+            override fun isViewFromObject(p0: View, p1: Any): Boolean {
+                return p0 == p1
+            }
+
+            override fun destroyItem(container: ViewGroup, position: Int, any: Any) {
+                container.removeView(any as View)
+            }
+
+            override fun instantiateItem(container: ViewGroup, position: Int): Any {
+                val view = getPageView.invoke(position)
+                container.addView(view)
+                return view
+            }
+        }
+        this.adapter = pagerAdapter
     }
 
 }

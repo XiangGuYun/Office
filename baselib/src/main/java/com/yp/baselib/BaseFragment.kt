@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.gson.Gson
+import com.kotlinlib.common.StringUtils
 import com.kotlinlib.view.base.ViewUtils
 import com.yp.baselib.utils.ContextUtils
 import me.yokeyword.fragmentation.SupportFragment
@@ -17,7 +18,7 @@ import org.greenrobot.eventbus.EventBus
 /**
  * Fragment的基类
  */
-abstract class BaseFragment : SupportFragment(), ViewUtils, ContextUtils {
+abstract class BaseFragment : SupportFragment(), ViewUtils, ContextUtils, StringUtils {
 
     companion object {
         lateinit var gson:Gson

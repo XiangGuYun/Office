@@ -24,7 +24,7 @@ class Indicator @JvmOverloads constructor(
         addView(rv)
     }
 
-    fun setRV(dotNumber:Int): Indicator {
+    fun setDotNumber(dotNumber:Int): Indicator {
         rv.wrap.managerHorizontal().rvMultiAdapter(
             (0 until dotNumber).toList(),
             { holder, pos ->

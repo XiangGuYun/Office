@@ -9,6 +9,7 @@ import com.yp.baselib.utils.fragment.old.FragmentUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
 import com.office.yewu.product_detail.CzProductDetailFragment
+import com.office.yewu.product_detail.ZhuangRongDetailFragment
 import kotlinx.android.synthetic.main.activity_products.*
 
 @StatusBarColor("#000000")
@@ -28,6 +29,12 @@ class ProductsActivity : BaseActivity(), RVInterface {
 
         val fu = FragmentUtils<BaseFragment>(this, ArrayList(list.mapIndexed { index, s ->
             when (index) {
+                0 -> {
+                    NewProductFragment()
+                }
+                1 -> {
+                    ZhuangRongDetailFragment()
+                }
                 list.size-3 -> {
                     CzProductDetailFragment()
                 }
