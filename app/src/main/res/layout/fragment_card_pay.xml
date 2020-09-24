@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnOtherPay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="其它方式支付"
+            android:textColor="#333333"
+            android:background="@drawable/bg_price"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btnSettle"
+            android:text="刷卡支付 ￥300"
+            android:layout_width="0dp"
+            android:textSize="16sp"
+            android:background="@drawable/bg_jie_suan"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="70dp"
+    android:layout_height="60dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/bg_add_face">
+        <Button
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:text="添加人脸"
+            android:textSize="10sp"
+            android:background="@drawable/bg_login_btn"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+
+</FrameLayout>

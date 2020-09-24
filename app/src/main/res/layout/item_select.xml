@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingBottom="4dp">
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="69dp"
+        android:layout_height="10dp"
+        android:text="新品上市 # NEW IN "
+        android:textColor="#FFFFFF"
+        android:textSize="7sp"
+        />
+</FrameLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#66ff66"
+        android:id="@+id/ivProduct"/>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="明星挚爱红毯唇膏\n盛世美唇惊艳全场"
+        android:textColor="#ffffffff"
+        android:textSize="6sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="6dp"
+        android:text="欧菲姿OFFICE红毯丝绒唇膏 3.2g"
+        android:textColor="#ffffffff"
+        android:textSize="5sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OFFICE RED CARPET VELVELT LIPSTICK"
+        android:textColor="#ccffffff"
+        android:gravity="center_horizontal"
+        android:textSize="4sp"
+        android:layout_marginBottom="23.5dp"
+        />
+
+</LinearLayout>
