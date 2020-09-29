@@ -21,7 +21,7 @@ class SplashActivity : BaseActivity() {
 
             }
             override fun onFinish() {
-                goTo<ProductsActivity>()
+                goTo<MainActivity>()
                 finish()
             }
         }

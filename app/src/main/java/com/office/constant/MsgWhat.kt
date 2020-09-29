@@ -6,4 +6,6 @@ package com.office.constant
  */
 object MsgWhat {
 
+    const val SWITCH_TO_DETAIL_PAGE = 0x001
+
 }

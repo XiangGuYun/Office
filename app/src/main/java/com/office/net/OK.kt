@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
 import okhttp3.Call
+import okhttp3.MediaType
 
 object OK {
 
@@ -15,15 +16,20 @@ object OK {
                                 vararg pairs: Pair<String, String>,//参数
     ) {
         Log.d("OK_Result", "url is $url");
-        val builder = OkHttpUtils
-            .post()
-            .url("todo$url")
 
-        pairs.forEach {
-            if (it.second != OPTIONAL)
-                builder.addParams(it.first, it.second)
-            Log.d("OK_Result", "参数：${it.first}, ${it.second}")
-        }
+        val mapJson = Gson().toJson(HashMap(pairs.toMap()).filterValues { it != OPTIONAL })
+        val builder = OkHttpUtils
+            .postString()
+            .url("http://124.70.156.186:8001$url")
+            .content(mapJson)
+            .mediaType(MediaType.parse("application/json; charset=utf-8"))
+
+        Log.d("OK_Result", "mapJson is ${mapJson}");
+//        pairs.forEach {
+//            if (it.second != OPTIONAL)
+//                builder.addParams(it.first, it.second)
+//            Log.d("OK_Result", "参数：${it.first}, ${it.second}")
+//        }
 
         builder.build()
             .connTimeOut(6000)

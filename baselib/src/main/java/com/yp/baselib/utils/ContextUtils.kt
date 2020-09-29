@@ -196,15 +196,15 @@ interface ContextUtils : FileUtils {
     /**
      * 获取Bundle整型
      */
-    fun Activity.extraInt(pair: Pair<String, Int>): Int {
-        return intent.getIntExtra(pair.first, pair.second)
+    fun Activity.extraInt(tag:String, defValue:Int): Int {
+        return intent.getIntExtra(tag, defValue)
     }
 
     /**
      * 获取Bundle布尔值
      */
-    fun Activity.extraBool(pair: Pair<String, Boolean>): Boolean {
-        return intent.getBooleanExtra(pair.first, pair.second)
+    fun Activity.extraBool(tag:String, defValue:Boolean): Boolean {
+        return intent.getBooleanExtra(tag, defValue)
     }
 
     /**

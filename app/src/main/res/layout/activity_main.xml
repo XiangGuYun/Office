@@ -28,6 +28,7 @@
                 android:layout_marginRight="6dp">
 
                 <TextView
+                    android:id="@+id/btnProducts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_btn_white"
@@ -49,6 +50,7 @@
 
 
             <TextView
+                android:id="@+id/btnCaiZhuangXiLie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -69,6 +71,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/btnZhuangQian"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_8d8d8d"
@@ -82,6 +85,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnDiZhuang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_ffdeca"
@@ -95,6 +99,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnDingZhuang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_fdcfaf"
@@ -108,6 +113,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnJiaZhuang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_dfa98a"
@@ -121,6 +127,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnMeiZhuang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_9e7777"
@@ -134,6 +141,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnYanZhuang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_ff7f29"
@@ -147,6 +155,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnChunZhuang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_ce0000"
@@ -160,6 +169,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnXieZhuang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_ffffff"
@@ -175,6 +185,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/btnHuFuXiLie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -195,6 +206,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/btnMianBuQingJie"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_c4fffe"
@@ -208,6 +220,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnMianBuHuLi"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_fdcdaf"
@@ -221,6 +234,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnYanBuHuLi"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_ffb7f7"
@@ -234,6 +248,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnChunBuHuLi"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_ff4444"
@@ -249,6 +264,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/btnGongJuXiLie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -269,6 +285,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/btnShuaJu"
                     android:layout_width="35.5dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_stroke"
@@ -282,6 +299,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnYiQi"
                     android:layout_width="35.5dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_stroke"
@@ -295,6 +313,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnFuZhu"
                     android:layout_width="35.5dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_stroke"
@@ -444,67 +463,100 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/btnCJZR1"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_shcz"
                     android:gravity="center"
                     android:text="生活彩妆"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="6sp"
+                    android:visibility="invisible" />
 
                 <View
                     android:layout_width="10dp"
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnCJZR2"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_ffffff"
                     android:gravity="center"
                     android:text="职场彩妆"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="6sp"
+                    android:visibility="invisible" />
 
                 <View
                     android:layout_width="10dp"
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnCJZR3"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_yhcz"
                     android:gravity="center"
                     android:text="约会彩妆"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="6sp"
+                    android:visibility="invisible" />
 
                 <View
                     android:layout_width="10dp"
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnCJZR4"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_sscz"
                     android:gravity="center"
                     android:text="时尚彩妆"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="6sp"
+                    android:visibility="invisible" />
 
                 <View
                     android:layout_width="10dp"
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnCJZR5"
                     android:layout_width="50dp"
                     android:layout_height="11.5dp"
                     android:background="@drawable/bg_rect_qscz"
                     android:gravity="center"
                     android:text="趋势彩妆"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="6sp"
+                    android:visibility="invisible" />
 
                 <View
+                    android:layout_width="10dp"
+                    android:layout_height="1dp" />
+
+                <View
+                    android:id="@+id/viewSpace1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/btnCJZR6"
+                    android:layout_width="50dp"
+                    android:layout_height="11.5dp"
+                    android:background="@drawable/bg_rect_qscz"
+                    android:gravity="center"
+                    android:text="趋势彩妆"
+                    android:textColor="#000000"
+                    android:textSize="6sp"
+                    android:visibility="invisible" />
+
+                <View
+                    android:id="@+id/viewSpace2"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1" />

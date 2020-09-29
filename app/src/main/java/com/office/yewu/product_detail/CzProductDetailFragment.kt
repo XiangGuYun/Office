@@ -1,5 +1,7 @@
 package com.office.yewu.product_detail
 
+import android.os.Bundle
+import com.office.net.Req
 import com.yp.baselib.BaseFragment
 import com.yp.baselib.LayoutId
 import com.yp.baselib.utils.fragment.old.FragmentUtils
@@ -14,7 +16,22 @@ import kotlinx.android.synthetic.main.fragment_cz_pd.*
 class CzProductDetailFragment : BaseFragment(), RVInterface {
     private lateinit var fu: FragmentUtils<ProductGalleryFragment>
 
+    companion object{
+        fun newInstance(id:Int): CzProductDetailFragment {
+            return CzProductDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putInt("id", id)
+                }
+            }
+        }
+    }
+
     override fun init() {
+
+        Req.getShangPinXiangQing(arguments!!.getInt("id")){
+            // 轮播图
+            val bannerImgList = it.data.bannerImg.split(",")
+        }
 
         fu = FragmentUtils<ProductGalleryFragment>(getAct(), ArrayList((1..24).map { ProductGalleryFragment() }.toList()), R.id.flContainerPD)
 

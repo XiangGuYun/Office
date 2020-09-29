@@ -19,6 +19,7 @@ import com.githang.statusbar.StatusBarCompat
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.kotlinlib.view.base.ViewUtils
+import com.yp.baselib.utils.ContextUtils
 import me.yokeyword.fragmentation.SupportActivity
 import org.greenrobot.eventbus.EventBus
 
@@ -26,7 +27,7 @@ import org.greenrobot.eventbus.EventBus
 /**
  * 最基类Activity
  */
-abstract class BaseActivity : SupportActivity(), ViewUtils {
+abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils {
 
     val ACTIVITY_NAME = "ac_name"
     var startEventBus = false//是否启用EventBus

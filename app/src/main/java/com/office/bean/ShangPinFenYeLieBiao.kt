@@ -1,27 +1,20 @@
 package com.office.bean
 
+import java.io.Serializable
+
 data class ShangPinFenYeLieBiao(
     val code: Int,
+    val `data`: List<Data>,
     val enmsg: String,
-    val errmsg: String,
     val msg: String,
-    val ok: Boolean,
-    val otherMap: OtherMap,
-    val pageNo: Int,
-    val pageSize: Int,
-    val pages: Int,
-    val rows: List<Row>,
-    val total: Int
-) {
-    class OtherMap(
-    )
-
-    data class Row(
+    val ok: Boolean
+) : Serializable {
+    data class Data(
         val enName: String,
         val id: Int,
         val imgCover: String,
         val name: String,
         val productModel: String,
         val titleList: String
-    )
+    ) : Serializable
 }

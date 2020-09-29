@@ -12,10 +12,16 @@ import kotlinx.android.synthetic.main.fragment_product_gallery.*
 
 
 /**
- *
+ * 商品详情轮播图
  */
 @LayoutId(R.layout.fragment_product_gallery)
 class ProductGalleryFragment : BaseFragment(), RVInterface {
+
+    companion object{
+        fun newInstance(): ProductGalleryFragment {
+            return ProductGalleryFragment()
+        }
+    }
 
     override fun init() {
 
