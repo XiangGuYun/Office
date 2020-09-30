@@ -31,25 +31,23 @@ class CzProductDetailFragment : BaseFragment(), RVInterface {
         Req.getShangPinXiangQing(arguments!!.getInt("id")){
             // 轮播图
             val bannerImgList = it.data.bannerImg.split(",")
+            fu = FragmentUtils<ProductGalleryFragment>(getAct(), ArrayList((1..24).map { ProductGalleryFragment() }.toList()), R.id.flContainerPD)
+
+            var selectedIndex = 0
+
+            rvColor.wrap.gridManager(12).rvAdapter(
+                (0 until 24).toList(),
+                { holder, pos ->
+                    holder.v(R.id.ivColor).setBackgroundColor(randomColor())
+                    holder.v(R.id.mask).showOrGone(selectedIndex != pos)
+                    holder.itemClick {
+                        selectedIndex = pos
+                        fu.switch(pos)
+                        rvColor.update()
+                    }
+                }, R.layout.item_color
+            )
         }
-
-        fu = FragmentUtils<ProductGalleryFragment>(getAct(), ArrayList((1..24).map { ProductGalleryFragment() }.toList()), R.id.flContainerPD)
-
-
-        var selectedIndex = 0
-
-        rvColor.wrap.gridManager(12).rvAdapter(
-            (0 until 24).toList(),
-            { holder, pos ->
-                holder.v(R.id.ivColor).setBackgroundColor(randomColor())
-                holder.v(R.id.mask).showOrGone(selectedIndex != pos)
-                holder.itemClick {
-                    selectedIndex = pos
-                    fu.switch(pos)
-                    rvColor.update()
-                }
-            }, R.layout.item_color
-        )
 
         flCPCS.click {
             if (!llCPCS.canSee()) {

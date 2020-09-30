@@ -55,9 +55,12 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
                     }
                     showBitmap(act(), holder.iv(R.id.ivProduct), list[it][pos].imgCover)
                     holder.tv(R.id.tvDesc).text = list[it][pos].name
-                    holder.itemClick {
+                    holder.itemClick {v->
                         EventBus.getDefault()
-                            .post(Message.obtain().apply { what = MsgWhat.SWITCH_TO_DETAIL_PAGE })
+                            .post(Message.obtain().apply {
+                                what = MsgWhat.SWITCH_TO_DETAIL_PAGE
+                                obj = list[it][pos].id
+                            })
                     }
                 }, {
                     0

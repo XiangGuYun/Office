@@ -26,7 +26,7 @@ class ProductsActivity : BaseActivity(), RVInterface {
     fun handle(msg: Message){
         when(msg.what){
             MsgWhat.SWITCH_TO_DETAIL_PAGE -> {
-                fu.switch(CzProductDetailFragment())
+                fu.switch(CzProductDetailFragment.newInstance(msg.obj.toString().toInt()))
             }
         }
     }
