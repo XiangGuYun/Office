@@ -10,25 +10,29 @@ import com.yp.baselib.StatusBarColor
 import com.yp.oom.R
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * 主页
+ */
 @StatusBarColor("#000000")
 @LayoutId(R.layout.activity_main)
 class MainActivity : BaseActivity() {
 
     override fun init(bundle: Bundle?) {
-
+        // 场景妆容区域的六个按钮，其显示与否根据后端动态返回决定
         val btnZrList = listOf(btnCJZR1, btnCJZR2, btnCJZR3, btnCJZR4, btnCJZR5, btnCJZR6)
 
+        // 场景妆容的数据集合
         val listZR = ArrayList<ZhuangRongFenLeiShu.Data.Child>()
 
-        Req.getZhuangRongFenLeiShu(0){
+        Req.getZhuangRongFenLeiShu(0){ it ->
             it.data.forEach {
+                // 收集场景妆容下的数据类
                 if(it.name == "场景妆容"){
                     listZR.addAll(it.childList)
                 }
             }
-            listZR.size.toast()
-
             listZR.forEachIndexed { index, child ->
+                // 根据场景妆容数据类；来决定这个区域按钮显示和名称
                 btnZrList[index].show().text = child.name
             }
         }
@@ -37,6 +41,9 @@ class MainActivity : BaseActivity() {
 
     }
 
+    /**
+     * 处理所有可点击单位的点击事件
+     */
     private fun initClickEvent() {
         btnProducts.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 0)

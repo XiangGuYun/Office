@@ -1,27 +1,28 @@
 package com.office.yewu.products
 
 import android.os.Bundle
-import android.os.Message
-import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
-import android.widget.LinearLayout
+import com.kotlinlib.common.LLLP
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.bean.ShangPinFenYeLieBiao
 import com.office.constant.MsgWhat
 import com.office.net.Req
-import com.office.yewu.product_detail.CzProductDetailFragment
 import com.yp.baselib.BaseFragment
-import com.yp.baselib.FragPagerUtils
 import com.yp.baselib.LayoutId
+import com.yp.baselib.listener.VpChangeListener
+import com.yp.baselib.utils.BusUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
 import kotlinx.android.synthetic.main.fragment_products.*
-import org.greenrobot.eventbus.EventBus
 import kotlin.math.min
 
+/**
+ * Products对应的右侧Fragment
+ */
 @LayoutId(R.layout.fragment_products)
 class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
+
     override fun init() {
+
     }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
@@ -42,25 +43,20 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
                 list.addAll(it.data.subList(4 * index, min(4 * index + 4, it.data.size)))
             }
 
-//            FragPagerUtils<ProductsSubFragment>(this, vpDetail, list.map {
-//                ProductsSubFragment.newInstance(it)
-//            })
             vpDetail.setViewAdapter(pageSize) {
-                val view = LayoutInflater.from(act()).inflate(R.layout.fragment_products_sub, null)
+                val view = getAct().inflate(R.layout.fragment_products_sub)
                 view.rv(R.id.rvDetail).wrap.gridManager(2).rvMultiAdapter(list[it], { holder, pos ->
-                    holder.iv(R.id.ivProduct).doLP<LinearLayout.LayoutParams> {
-                        val size = (getAct().srnWidth - 100.dp - 30.dp - 2.5.dp) / 2
-                        it.width = size
-                        it.height = size
-                    }
                     showBitmap(act(), holder.iv(R.id.ivProduct), list[it][pos].imgCover)
-                    holder.tv(R.id.tvDesc).text = list[it][pos].name
-                    holder.itemClick {v->
-                        EventBus.getDefault()
-                            .post(Message.obtain().apply {
-                                what = MsgWhat.SWITCH_TO_DETAIL_PAGE
-                                obj = list[it][pos].id
-                            })
+                    holder.apply {
+                        iv(R.id.ivProduct).doLP<LLLP> {
+                            val size = (getAct().srnWidth - 100.dp - 30.dp - 2.5.dp) / 2
+                            it.width = size
+                            it.height = size
+                        }
+                        tv(R.id.tvDesc).text = list[it][pos].name
+                        itemClick { _ ->
+                            BusUtils.post(MsgWhat.SWITCH_TO_DETAIL_PAGE, list[it][pos].id)
+                        }
                     }
                 }, {
                     0
@@ -69,7 +65,6 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
             }
 
         }
-
 
         var whiteDotIndex = 0
 
@@ -83,19 +78,11 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
             }, R.layout.item_dot_white, R.layout.item_dot_dark
         )
 
-        vpDetail.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
-
-            }
-
+        vpDetail.setOnPageChangeListener(object : VpChangeListener {
             override fun onPageSelected(p0: Int) {
                 whiteDotIndex = p0
                 rvDots.update()
             }
-
-            override fun onPageScrollStateChanged(p0: Int) {
-            }
-
         })
 
     }
@@ -111,3 +98,7 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
     }
 
 }
+
+//            FragPagerUtils<ProductsSubFragment>(this, vpDetail, list.map {
+//                ProductsSubFragment.newInstance(it)
+//            })

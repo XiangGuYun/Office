@@ -7,29 +7,39 @@ import com.zhy.http.okhttp.callback.StringCallback
 import okhttp3.Call
 import okhttp3.MediaType
 
+/**
+ * 接口请求工具类
+ */
 object OK {
 
+    /**
+     * 表示所传参数被忽略
+     */
     const val OPTIONAL = "optional"
+    
+    val TAG = "OK_Result"
+    
+    const val BASE_URL = "http://124.70.156.186:8001"
+    
+    const val MEDIA_TYPE = "application/json; charset=utf-8"
 
+    /**
+     * post请求
+     */
     inline fun <reified T> post(url: String, //URL
                                 crossinline onSuccess: (data: T) -> Unit, //成功回调
-                                vararg pairs: Pair<String, String>,//参数
+                                vararg pairs: Pair<String, String>//参数
     ) {
-        Log.d("OK_Result", "url is $url");
+        Log.d(TAG, "url is $url");
 
         val mapJson = Gson().toJson(HashMap(pairs.toMap()).filterValues { it != OPTIONAL })
         val builder = OkHttpUtils
             .postString()
-            .url("http://124.70.156.186:8001$url")
+            .url("$BASE_URL$url")
             .content(mapJson)
-            .mediaType(MediaType.parse("application/json; charset=utf-8"))
+            .mediaType(MediaType.parse(MEDIA_TYPE))
 
-        Log.d("OK_Result", "mapJson is ${mapJson}");
-//        pairs.forEach {
-//            if (it.second != OPTIONAL)
-//                builder.addParams(it.first, it.second)
-//            Log.d("OK_Result", "参数：${it.first}, ${it.second}")
-//        }
+        Log.d(TAG, "mapJson is $mapJson");
 
         builder.build()
             .connTimeOut(6000)
@@ -38,15 +48,13 @@ object OK {
             .execute(object : StringCallback() {
 
                 override fun onError(call: Call?, e: Exception?, id: Int) {
-                    Log.d("OK_Result", "error is ${e?.localizedMessage}");
+                    Log.d(TAG, "error is ${e?.localizedMessage}");
                     call?.cancel()
                 }
 
                 override fun onResponse(response: String?, id: Int) {
-                    Log.d("OK_Result", response)
-                    //被reified修饰的T可以调用class.java
-                    val gson = Gson()
-                    onSuccess.invoke(gson.fromJson(response, T::class.java))
+                    Log.d(TAG, response!!)
+                    onSuccess.invoke(Gson().fromJson(response, T::class.java))
                 }
             })
 

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
@@ -369,6 +370,10 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils {
         } else {
             window.decorView.systemUiVisibility = SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         }
+    }
+
+    fun inflate(id:Int): View {
+        return LayoutInflater.from(this).inflate(id, null)
     }
 
 }

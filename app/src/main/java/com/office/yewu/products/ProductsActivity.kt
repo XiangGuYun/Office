@@ -13,6 +13,9 @@ import com.yp.baselib.*
 import kotlinx.android.synthetic.main.activity_products.*
 import org.greenrobot.eventbus.Subscribe
 
+/**
+ * 产品页
+ */
 @Bus
 @StatusBarColor("#000000")
 @LayoutId(R.layout.activity_products)
@@ -20,31 +23,26 @@ class ProductsActivity : BaseActivity(), RVInterface {
 
     private lateinit var fu: FragmentUtils<BaseFragment>
 
+    /**
+     * 显示在左侧的标签列表
+     * Pair的first代表标签名称
+     * Pair的second代表标签ID
+     */
     var listShowTag = listOf<Pair<String, Int>>()
 
     @Subscribe
     fun handle(msg: Message){
         when(msg.what){
             MsgWhat.SWITCH_TO_DETAIL_PAGE -> {
+                // 根据传过来的产品ID来切换到对应的产品详情页
                 fu.switch(CzProductDetailFragment.newInstance(msg.obj.toString().toInt()))
             }
         }
     }
 
     override fun init(bundle: Bundle?) {
-
-//        val list = listOf(
-//            "新品上市 # NEW IN", "彩妆系列 # BEAUTY ←",
-//            " · 妆前", " · 底妆", " · 定妆", " · 颊妆", " · 眉妆", " · 眼妆", " · 唇妆", " · 卸妆",
-//            "护肤系列 # COSMETIC", " · 面部清洁", " · 面部护理", " · 眼部护理", " · 唇部护理",
-//            "工具系列 # TOOLS", " · 刷具", " · 仪器", " · 辅助", "- MAKEUP", "局部妆容"," · 底妆",
-//            " · 颊妆"," · 眉妆"," · 眼妆"," · 唇妆","场景妆容 # SCENE"," · 生活彩妆"," · 职场彩妆",
-//            " · 约会彩妆"," · 时尚彩妆","· 趋势彩妆", "- ABOUT ←"
-//        )
-
-        val type = extraStr("type")
-
-        when (type) {
+        // 获取到显示类型，需要根据显示类型来决定左侧区域显示哪些标签
+        when (extraStr("type")) {
             "Products" -> {
                 listShowTag = listOf(
                     "新品上市 # NEW IN" to -1, "彩妆系列 # BEAUTY ←" to Id.CAI_ZHUANG_XI_LIE,
@@ -58,6 +56,7 @@ class ProductsActivity : BaseActivity(), RVInterface {
             }
         }
 
+        // 根据标签列表映射出对应的Fragment列表并进行管理
         fu = FragmentUtils<BaseFragment>(this, ArrayList(listShowTag.mapIndexed { index, s ->
             when (index) {
 //                0 -> {
@@ -81,8 +80,10 @@ class ProductsActivity : BaseActivity(), RVInterface {
             }
         }), R.id.flContainer)
 
+        // 获取到默认选中的标签项
         var selectedIndex = extraInt("index", 0)
 
+        // 构建左侧列表
         rvLeft.wrap.rvMultiAdapter(
             listShowTag,
             { h, p ->
@@ -98,7 +99,17 @@ class ProductsActivity : BaseActivity(), RVInterface {
             }, R.layout.item_unselect, R.layout.item_select
         )
 
+        // 切换到对应的右侧Fragment
         if(selectedIndex != 0) fu.switch(selectedIndex)
     }
 
 }
+
+//        val list = listOf(
+//            "新品上市 # NEW IN", "彩妆系列 # BEAUTY ←",
+//            " · 妆前", " · 底妆", " · 定妆", " · 颊妆", " · 眉妆", " · 眼妆", " · 唇妆", " · 卸妆",
+//            "护肤系列 # COSMETIC", " · 面部清洁", " · 面部护理", " · 眼部护理", " · 唇部护理",
+//            "工具系列 # TOOLS", " · 刷具", " · 仪器", " · 辅助", "- MAKEUP", "局部妆容"," · 底妆",
+//            " · 颊妆"," · 眉妆"," · 眼妆"," · 唇妆","场景妆容 # SCENE"," · 生活彩妆"," · 职场彩妆",
+//            " · 约会彩妆"," · 时尚彩妆","· 趋势彩妆", "- ABOUT ←"
+//        )

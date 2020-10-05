@@ -12,5 +12,7 @@ import com.yp.oom.R
 class StandbyActivity : BaseActivity() {
     override fun init(bundle: Bundle?) {
 
+        
+
     }
 }
