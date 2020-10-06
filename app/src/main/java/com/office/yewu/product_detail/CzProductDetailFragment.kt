@@ -16,6 +16,10 @@ import kotlinx.android.synthetic.main.fragment_cz_pd.*
 class CzProductDetailFragment : BaseFragment(), RVInterface {
     private lateinit var fu: FragmentUtils<ProductGalleryFragment>
 
+    private val SINGLE_COLOR = 1
+
+    private val MULTI_COLOR = 2
+
     companion object{
         fun newInstance(id:Int): CzProductDetailFragment {
             return CzProductDetailFragment().apply {
@@ -35,18 +39,39 @@ class CzProductDetailFragment : BaseFragment(), RVInterface {
 
             var selectedIndex = 0
 
-            rvColor.wrap.gridManager(12).rvAdapter(
-                (0 until 24).toList(),
-                { holder, pos ->
-                    holder.v(R.id.ivColor).setBackgroundColor(randomColor())
-                    holder.v(R.id.mask).showOrGone(selectedIndex != pos)
-                    holder.itemClick {
-                        selectedIndex = pos
-                        fu.switch(pos)
-                        rvColor.update()
-                    }
-                }, R.layout.item_color
-            )
+            // 颜色图片列表
+            when (it.data.skuType) {
+                SINGLE_COLOR -> {
+                    rvColor.wrap.gridManager(12).rvAdapter(
+                        (0 until 24).toList(),
+                        { holder, pos ->
+                            holder.v(R.id.ivColor).setBackgroundColor(randomColor())
+                            holder.v(R.id.mask).showOrGone(selectedIndex != pos)
+                            holder.itemClick {
+                                selectedIndex = pos
+                                fu.switch(pos)
+                                rvColor.update()
+                            }
+                        }, R.layout.item_color
+                    )
+                }
+                MULTI_COLOR -> {
+                    rvColor.wrap.gridManager(8).rvAdapter(
+                        (0 until 8).toList(),
+                        { holder, pos ->
+                            holder.v(R.id.ivColor).setBackgroundColor(randomColor())
+                            holder.v(R.id.mask).showOrGone(selectedIndex != pos)
+                            holder.itemClick {
+                                selectedIndex = pos
+                                fu.switch(pos)
+                                rvColor.update()
+                            }
+                        }, R.layout.item_color_multi
+                    )
+                }
+            }
+
+
         }
 
         flCPCS.click {

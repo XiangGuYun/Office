@@ -1,3 +1,5 @@
+@file:Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package com.kotlinlib.common
 
 import android.annotation.SuppressLint
@@ -93,7 +95,7 @@ interface StringUtils {
      * 将特定格式的时间转换为时间长整型
      */
     fun String.reverseFmtDate(fmt: String): Long {
-        return SimpleDateFormat(fmt).parse(this).time
+        return SimpleDateFormat(fmt, Locale.CHINA).parse(this).time
     }
 
     /**
@@ -103,7 +105,7 @@ interface StringUtils {
      * @return String 如2008-10-01
      */
     fun String.fmtDate(fmt: String): String {
-        return SimpleDateFormat(fmt).format(Date(this.toLong()))
+        return SimpleDateFormat(fmt, Locale.CHINA).format(Date(this.toLong()))
     }
 
     /**
@@ -170,9 +172,9 @@ interface StringUtils {
      * 获取随机颜色
      */
     fun randomColor(): Int {
-        var r = Integer.toHexString(Random().nextInt(256)).toUpperCase()
-        var g = Integer.toHexString(Random().nextInt(256)).toUpperCase()
-        var b = Integer.toHexString(Random().nextInt(256)).toUpperCase()
+        var r = Integer.toHexString(Random().nextInt(256)).toUpperCase(Locale.ROOT)
+        var g = Integer.toHexString(Random().nextInt(256)).toUpperCase(Locale.ROOT)
+        var b = Integer.toHexString(Random().nextInt(256)).toUpperCase(Locale.ROOT)
 
         r = if (r.length == 1) "0$r" else r
         g = if (g.length == 1) "0$g" else g
@@ -222,21 +224,6 @@ interface StringUtils {
      */
     fun String.assetsUrl(): String {
         return "file:////android_asset/$this.html"
-    }
-
-    /**
-     * 支持多重的replace
-     * <code>
-     * "测试文本".replace("测" to "1", "文" to "3")
-     * "测试文本".replace("测", "1").replace("文", 3)
-     * </code>
-     */
-    fun String.replace(vararg pair: Pair<String, String>): String {
-        var string = ""
-        pair.forEach {
-            string = string.replace(it.first, it.second)
-        }
-        return string
     }
 
 }

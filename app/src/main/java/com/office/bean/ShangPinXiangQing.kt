@@ -21,7 +21,8 @@ data class ShangPinXiangQing(
         val productModel: String,
         val productParam: String,
         val productVideo: String,
-        val titleList: String
+        val titleList: String,
+        val skuType: Int
     ) {
         data class MallSkuDetail(
             val id: Int,
