@@ -10,6 +10,7 @@
 
     <application
         android:name="com.office.app.MyApplication"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,6 +29,11 @@
         <activity android:name="com.office.yewu.products.ProductsActivity">
         </activity>
         <activity android:name="com.office.yewu.MainActivity"></activity>
+        <activity android:name="com.office.test.TestVideoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

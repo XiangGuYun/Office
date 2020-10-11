@@ -1,3 +1,4 @@
+include ':androidxlib'
 include ':baselib'
 include ':app'
 rootProject.name = "Office"

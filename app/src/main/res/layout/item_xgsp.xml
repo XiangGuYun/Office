@@ -8,8 +8,8 @@
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="70dp">
-        <View
-            android:background="#5F5F5F"
+        <ImageView
+            android:id="@+id/ivPreviewFrame"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             />

@@ -1,6 +1,7 @@
 package com.office.yewu.product_detail
 
 import android.os.Bundle
+import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.net.Req
 import com.yp.baselib.BaseFragment
 import com.yp.baselib.LayoutId
@@ -13,15 +14,15 @@ import kotlinx.android.synthetic.main.fragment_cz_pd.*
  * 产品详情
  */
 @LayoutId(R.layout.fragment_cz_pd)
-class CzProductDetailFragment : BaseFragment(), RVInterface {
+class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
     private lateinit var fu: FragmentUtils<ProductGalleryFragment>
 
     private val SINGLE_COLOR = 1
 
     private val MULTI_COLOR = 2
 
-    companion object{
-        fun newInstance(id:Int): CzProductDetailFragment {
+    companion object {
+        fun newInstance(id: Int): CzProductDetailFragment {
             return CzProductDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)
@@ -32,20 +33,48 @@ class CzProductDetailFragment : BaseFragment(), RVInterface {
 
     override fun init() {
 
-        Req.getShangPinXiangQing(arguments!!.getInt("id")){
+        Req.getShangPinXiangQing(arguments!!.getInt("id")) {
             // 轮播图
             val bannerImgList = it.data.bannerImg.split(",")
-            fu = FragmentUtils<ProductGalleryFragment>(getAct(), ArrayList((1..24).map { ProductGalleryFragment() }.toList()), R.id.flContainerPD)
+            fu = FragmentUtils<ProductGalleryFragment>(
+                getAct(),
+                ArrayList(it.data.mallSkuDetailList.map { ProductGalleryFragment.newInstance(it.productImg) }
+                    .toList()),
+                R.id.flContainerPD
+            )
 
             var selectedIndex = 0
+
+            // 当前选择的颜色值
+            tvColor.text = it.data.mallSkuDetailList[0].productModel
+
+            // 产品参数
+            tvProductParams.text = it.data.productParam
+
+            // 产品特点
+            tvProductCharacter.text = it.data.productCharacter
+
+            // 相关视频
+            val videoList = it.data.productVideo.split(",").toList()
+            rvVideo.wrap.gridManager(2).rvAdapter(
+                videoList,
+                { holder, pos ->
+                    loadVideoScreenshot(getAct(), videoList[pos], holder.iv(R.id.ivPreviewFrame), 0)
+                }, R.layout.item_xgsp
+            )
 
             // 颜色图片列表
             when (it.data.skuType) {
                 SINGLE_COLOR -> {
                     rvColor.wrap.gridManager(12).rvAdapter(
-                        (0 until 24).toList(),
+                        it.data.mallSkuDetailList,
                         { holder, pos ->
-                            holder.v(R.id.ivColor).setBackgroundColor(randomColor())
+                            tvColor.text = it.data.mallSkuDetailList[pos].productModel
+                            showBitmap(
+                                getAct(),
+                                holder.iv(R.id.ivColor),
+                                it.data.mallSkuDetailList[pos].skuIcon
+                            )
                             holder.v(R.id.mask).showOrGone(selectedIndex != pos)
                             holder.itemClick {
                                 selectedIndex = pos
@@ -57,9 +86,14 @@ class CzProductDetailFragment : BaseFragment(), RVInterface {
                 }
                 MULTI_COLOR -> {
                     rvColor.wrap.gridManager(8).rvAdapter(
-                        (0 until 8).toList(),
+                        it.data.mallSkuDetailList,
                         { holder, pos ->
-                            holder.v(R.id.ivColor).setBackgroundColor(randomColor())
+                            tvColor.text = it.data.mallSkuDetailList[pos].productModel
+                            showBitmap(
+                                getAct(),
+                                holder.iv(R.id.ivColor),
+                                it.data.mallSkuDetailList[pos].skuIcon
+                            )
                             holder.v(R.id.mask).showOrGone(selectedIndex != pos)
                             holder.itemClick {
                                 selectedIndex = pos
@@ -93,12 +127,6 @@ class CzProductDetailFragment : BaseFragment(), RVInterface {
                 hideCPTD()
             }
         }
-
-        rvVideo.wrap.gridManager(2).rvAdapter(
-            listOf(1, 1, 1),
-            { holder, pos ->
-            }, R.layout.item_xgsp
-        )
 
         flXGSP.click {
             if (!llXGSP.canSee()) {

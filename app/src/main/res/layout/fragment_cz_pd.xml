@@ -75,31 +75,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/tvProductParams"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="产品名称："
             android:textColor="#ffffffff"
-            android:textSize="5sp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="规格："
-            android:textColor="#ffffffff"
-            android:textSize="5sp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="保质期："
-            android:textColor="#ffffffff"
-            android:textSize="5sp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="质地："
-            android:textColor="#ffffffff"
+            android:lineSpacingExtra="5dp"
             android:textSize="5sp"
             />
     </LinearLayout>
@@ -152,11 +132,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/tvProductCharacter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="· 添加抗蓝光I*BLUE OLEOACTIF复合成分」: 保护唇部肌肤不受蓝光伤害而出现问题，持久呵护唇部； · 三大口红质地；哑光、细闪、缎光,提供适合任何唇部肌肤的口红质地； · 汇聚24种潮流色,打造属于自己的专属风格； · 主要成分:野大豆油、稻胚芽提取物、牛油果树果脂、小烛树蜡、蓖麻籽油、锈红蔷薇籽油"
             android:textColor="#ffffffff"
-            android:lineSpacingExtra="1dp"
+            android:lineSpacingExtra="5dp"
             android:textSize="5sp"
             />
     </LinearLayout>

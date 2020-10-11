@@ -1,9 +1,9 @@
 package com.office.yewu.product_detail
 
-import android.support.v4.view.PagerAdapter
-import android.view.View
-import android.view.ViewGroup
+import android.os.Bundle
+import android.widget.ImageView
 import com.kotlinlib.common.LLLP
+import com.kotlinlib.common.bitmap.BmpUtils
 import com.yp.baselib.BaseFragment
 import com.yp.baselib.LayoutId
 import com.yp.baselib.utils.view.recyclerview.RVInterface
@@ -15,47 +15,42 @@ import kotlinx.android.synthetic.main.fragment_product_gallery.*
  * 商品详情轮播图
  */
 @LayoutId(R.layout.fragment_product_gallery)
-class ProductGalleryFragment : BaseFragment(), RVInterface {
+class ProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
 
-    companion object{
-        fun newInstance(): ProductGalleryFragment {
-            return ProductGalleryFragment()
+    companion object {
+        fun newInstance(imgUrls: String): ProductGalleryFragment {
+            return ProductGalleryFragment().apply {
+                arguments = Bundle().apply {
+                    putString("imgUrls", imgUrls)
+                }
+            }
         }
     }
 
     override fun init() {
 
-        vpGallery.doLP<LLLP> {
-            val size = getAct().srnWidth - 100.dp - 20.dp
-            it.width = size
-            it.height = size
+        val imgUrls = arguments!!.getString("imgUrls")
+
+        imgUrls?.let {
+            if (imgUrls.isEmpty()) return@let
+
+            val imgUrlList = imgUrls.split(",")
+
+            vpGallery.doLP<LLLP> {
+                val size = getAct().srnWidth - 100.dp - 20.dp
+                it.width = size
+                it.height = size
+            }
+
+            vpGallery.setViewAdapter(imgUrlList.size) { position: Int ->
+                val view = getAct().inflate(R.layout.iv_gallery) as ImageView
+                showBitmap(getAct(), view, imgUrlList[position])
+                view
+            }
+
+            indicator.setDotNumber(imgUrlList.size).bindViewPager(vpGallery)
         }
 
-        val pagerAdapter: PagerAdapter = object : PagerAdapter() {
-            override fun getCount(): Int {
-                return 3
-            }
-
-            override fun isViewFromObject(p0: View, p1: Any): Boolean {
-                return p0 == p1
-            }
-
-            override fun destroyItem(container: ViewGroup, position: Int, any: Any) {
-                container.removeView(any as View)
-            }
-
-            override fun instantiateItem(container: ViewGroup, position: Int): Any {
-                val view = getAct().inflater.inflate(R.layout.iv_gallery, null)
-                view.setBackgroundColor(randomColor())
-                container.addView(view)
-                return view
-            }
-        }
-
-
-        vpGallery.adapter = pagerAdapter
-
-        indicator.setDotNumber(3).bindViewPager(vpGallery)
 
     }
 

@@ -137,7 +137,6 @@ class FragmentUtils<T : Fragment> {
             transaction.add(contentId, targetFragment)// 隐藏当前的fragment，add下一个到Activity中
                 .addToBackStack(null)
                 .commit()
-
         } else {
             for (i in fragments.indices) {
                 if (fragments[i].isAdded) transaction.hide(fragments[i])

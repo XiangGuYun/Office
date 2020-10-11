@@ -38,4 +38,30 @@ object Id {
 
     const val FU_ZHU = 18
 
+    /*
+    局部妆容
+     */
+    const val CHUN_ZHUANG_JB = 7
+
+    const val YAN_ZHUANG_JB = 6
+
+    const val MEI_ZHUANG_JB = 5
+
+    const val JIA_ZHUANG_JB = 4
+
+    const val DI_ZHUANG_JB = 3
+
+    const val JU_BU_ZHUANG_RONG = 1
+
+    const val CHANG_JING_ZHUANG_RONG = 2
+
+    const val SHENG_HUO_CAI_ZHUANG = 55
+
+    const val ZHI_CHANG_CAI_ZHUANG = 56
+
+    const val YUE_HUI_CAI_ZHUANG = 57
+
+    const val SHI_SHANG_CAI_ZHUANG = 58
+
+    const val QU_SHU_CAI_ZHUANG = 59
 }

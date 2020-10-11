@@ -336,6 +336,7 @@
                 android:layout_marginRight="6dp">
 
                 <TextView
+                    android:id="@+id/btnMakeUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_btn_white"
@@ -376,6 +377,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/btnDiZhuangJB"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_ffdeca"
@@ -389,6 +391,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnJiaZhuangJB"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_dfa98a"
@@ -402,6 +405,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnMeiZhuangJB"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_9e7777"
@@ -415,6 +419,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnYanZhuangJB"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_ff7f29"
@@ -428,6 +433,7 @@
                     android:layout_height="1dp" />
 
                 <TextView
+                    android:id="@+id/btnChunZhuangJB"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_circle_ce0000"
@@ -443,6 +449,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/btnCJZR"
                 android:layout_width="79dp"
                 android:layout_height="10dp"
                 android:layout_gravity="center_horizontal"
@@ -563,6 +570,7 @@
             </LinearLayout>
 
             <FrameLayout
+                android:id="@+id/flAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
