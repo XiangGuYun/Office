@@ -141,4 +141,14 @@ object Req {
         )
     }
 
+    /**
+     * 获取基本参数
+     */
+    fun getBaseParams(paramid:Int, callback: (BaseParams) -> Unit){
+        OK.post<BaseParams>(URL.GET_BASE_PARAMS,
+            {
+                callback.invoke(it)
+            }, "paramid" to paramid.toString())
+    }
+
 }

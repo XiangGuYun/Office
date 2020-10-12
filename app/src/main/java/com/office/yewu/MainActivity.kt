@@ -9,6 +9,7 @@ import com.yp.baselib.LayoutId
 import com.yp.baselib.StatusBarColor
 import com.yp.oom.R
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.header.*
 
 /**
  * 主页
@@ -22,6 +23,15 @@ class MainActivity : BaseActivity() {
     }
 
     override fun init(bundle: Bundle?) {
+
+        ivOffice.click {
+            goTo<StandbyActivity>()
+        }
+
+        ivSearch.click {
+            goTo<SearchActivity>()
+        }
+
         // 场景妆容区域的六个按钮，其显示与否根据后端动态返回决定
         val btnZrList = listOf(btnCJZR1, btnCJZR2, btnCJZR3, btnCJZR4, btnCJZR5, btnCJZR6)
 

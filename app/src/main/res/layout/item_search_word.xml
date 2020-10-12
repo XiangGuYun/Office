@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvSearchWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HY08"
+        android:textColor="#ff939393"
+        android:textSize="6sp"
+        android:paddingLeft="8.5dp"
+        android:paddingRight="8.5dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:background="@drawable/bg_search_word"
+        />
+
+</FrameLayout>

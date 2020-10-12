@@ -3,5 +3,6 @@
     <declare-styleable name="RoundShaping">
         <attr name="corner_radius" format="dimension|reference"/>
         <attr name="clip_color" format="reference|color"/>
+        <attr name="is_circle" format="boolean"/>
     </declare-styleable>
 </resources>

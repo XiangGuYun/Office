@@ -5,6 +5,7 @@ import android.os.Message
 import com.office.constant.Id
 import com.office.constant.MsgWhat
 import com.office.yewu.MainActivity.Companion.numberCJZR
+import com.office.yewu.StandbyActivity
 import com.yp.baselib.utils.fragment.old.FragmentUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
@@ -12,6 +13,7 @@ import com.office.yewu.product_detail.CzProductDetailFragment
 import com.office.yewu.product_detail.ZhuangRongDetailFragment
 import com.yp.baselib.*
 import kotlinx.android.synthetic.main.activity_products.*
+import kotlinx.android.synthetic.main.header.*
 import org.greenrobot.eventbus.Subscribe
 
 /**
@@ -22,7 +24,8 @@ import org.greenrobot.eventbus.Subscribe
 @LayoutId(R.layout.activity_products)
 class ProductsActivity : BaseActivity(), RVInterface {
 
-    private lateinit var detailFragment: CzProductDetailFragment
+    private lateinit var productsDetailFragment: CzProductDetailFragment
+    private lateinit var zrDetailFragment:ZhuangRongDetailFragment
     private lateinit var fu: FragmentUtils<BaseFragment>
 
     /**
@@ -43,8 +46,13 @@ class ProductsActivity : BaseActivity(), RVInterface {
             MsgWhat.SWITCH_TO_DETAIL_PAGE -> {
                 // 根据传过来的产品ID来切换到对应的产品详情页
                 showRightDetailFragment = true
-                detailFragment = CzProductDetailFragment.newInstance(msg.obj.toString().toInt())
-                fu.switchFragmentWithStack(detailFragment)
+                if(type == "Products"){
+                    productsDetailFragment = CzProductDetailFragment.newInstance(msg.obj.toString().toInt())
+                    fu.switchFragmentWithStack(productsDetailFragment)
+                } else {
+                    zrDetailFragment = ZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
+                    fu.switchFragmentWithStack(zrDetailFragment)
+                }
             }
         }
     }
@@ -52,15 +60,26 @@ class ProductsActivity : BaseActivity(), RVInterface {
     override fun onBackPressedSupport() {
         if (showRightDetailFragment) {
             showRightDetailFragment = false
-            detailFragment.pop()
+            if(type == "Products"){
+                productsDetailFragment.pop()
+            } else {
+                zrDetailFragment.pop()
+            }
         } else {
             super.onBackPressedSupport()
         }
     }
 
+    lateinit var type:String
+
     override fun init(bundle: Bundle?) {
+
+        ivOffice.click {
+            goTo<StandbyActivity>()
+        }
+
         // 获取到显示类型，需要根据显示类型来决定左侧区域显示哪些标签
-        val type = extraStr("type")
+        type = extraStr("type")
         when (type) {
             "Products" -> {
                 listShowTag = arrayListOf(
@@ -86,6 +105,7 @@ class ProductsActivity : BaseActivity(), RVInterface {
                 )
             }
             "MakeUp" -> {
+                tvTop.text = "- MAKEUP"
                 listShowTag = arrayListOf(
                     "新品上市 # NEW IN" to -1,
                     "局部妆容 # FEATURE" to Id.JU_BU_ZHUANG_RONG,
@@ -130,7 +150,7 @@ class ProductsActivity : BaseActivity(), RVInterface {
                     if(type == "Products")
                         ProductsFragment.newInstance(s.second) as BaseFragment
                     else
-                        ZhuangRongSubFragment()
+                        ZhuangRongSubFragment.newInstance(s.second)
                 }
             }
         }), R.id.flContainer)
@@ -150,7 +170,11 @@ class ProductsActivity : BaseActivity(), RVInterface {
 
                     if (showRightDetailFragment) {
                         showRightDetailFragment = false
-                        detailFragment.pop()
+                        if(type == "Products"){
+                            productsDetailFragment.pop()
+                        } else {
+                            zrDetailFragment.pop()
+                        }
                     }
 
                     fu.switch(p)

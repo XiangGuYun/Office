@@ -5,6 +5,7 @@ import com.kotlinlib.common.LLLP
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.bean.ShangPinFenYeLieBiao
 import com.office.constant.MsgWhat
+import com.office.net.OK
 import com.office.net.Req
 import com.yp.baselib.BaseFragment
 import com.yp.baselib.LayoutId
@@ -25,15 +26,16 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
 
     }
 
+    val list = ArrayList<ArrayList<ShangPinFenYeLieBiao.Data>>()
+
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
         val id = arguments!!.getInt("id")
 
-        Req.getShangPinFenYeLieBiao(categoryId = id.toString()) {
+        Req.getShangPinFenYeLieBiao(categoryId = if(id==-1) OK.OPTIONAL else id.toString()) {
             val itemSize = it.data.size
             val pageSize = (itemSize + 3) / 4
 
-            val list = ArrayList<ArrayList<ShangPinFenYeLieBiao.Data>>()
 
             for (i in 0 until pageSize) {
                 list.add(ArrayList())
@@ -69,7 +71,7 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
         var whiteDotIndex = 0
 
         rvDots.wrap.managerHorizontal().rvMultiAdapter(
-            listOf(1, 1),
+            list,
             { holder, pos ->
 
             },

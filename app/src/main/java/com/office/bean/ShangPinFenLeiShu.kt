@@ -32,3 +32,11 @@ data class ShangPinFenLeiShu(
     class OtherMap(
     )
 }
+
+data class BaseParams(
+    val code: Int,
+    val `data`: String,
+    val enmsg: String,
+    val msg: String,
+    val ok: Boolean
+)

@@ -25,6 +25,7 @@
         android:layout_marginRight="10dp">
 
         <EditText
+            android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null" />

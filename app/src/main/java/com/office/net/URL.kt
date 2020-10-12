@@ -33,4 +33,9 @@ object URL {
     const val SHANG_PIN_FEN_LEI_LIE_BIAO = "/common/mallCategory/list"
 
     const val SHANG_PIN_FEN_LEI_SHU = "/common/mallCategory/tree"
+
+    /**
+     * 获取基本参数值
+     */
+    const val GET_BASE_PARAMS = "/common/baseParam/getFirstValue"
 }

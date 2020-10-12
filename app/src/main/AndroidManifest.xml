@@ -25,15 +25,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.office.yewu.SearchActivity"></activity>
+        <activity android:name="com.office.yewu.OfficeVideoActivity"/>
+        <activity android:name="com.office.yewu.SearchActivity" />
         <activity android:name="com.office.yewu.products.ProductsActivity">
         </activity>
-        <activity android:name="com.office.yewu.MainActivity"></activity>
+        <activity android:name="com.office.yewu.MainActivity" />
         <activity android:name="com.office.test.TestVideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait">
-
         </activity>
+        <activity android:name="com.office.yewu.StandbyActivity"/>
+        <activity android:name="com.office.yewu.SearchResultActivity"/>
     </application>
 
 </manifest>

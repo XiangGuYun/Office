@@ -1,14 +1,11 @@
 package com.office.bean
 
 data class ZhuangRongFenLeiXiangQing(
-    val checkOk: Boolean,
     val code: Int,
     val `data`: Data,
     val enmsg: String,
-    val errmsg: String,
     val msg: String,
-    val ok: Boolean,
-    val otherMap: OtherMap
+    val ok: Boolean
 ) {
     data class Data(
         val bigImg: String,
@@ -24,11 +21,13 @@ data class ZhuangRongFenLeiXiangQing(
         val pid: Int,
         val purposeDesc: String,
         val purposeStep: String,
+        val purposeStepList: List<PurposeStep>,
         val status: Int,
-        val title: String,
         val updateTime: String
-    )
-
-    class OtherMap(
-    )
+    ) {
+        data class PurposeStep(
+            val stepContent: String,
+            val stepName: String
+        )
+    }
 }
