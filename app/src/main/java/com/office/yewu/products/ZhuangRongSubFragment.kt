@@ -7,6 +7,7 @@ import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.bean.ShangPinFenYeLieBiao
 import com.office.bean.ZhuangRongFenLeiShu
 import com.office.constant.MsgWhat
+import com.office.net.OK
 import com.office.net.Req
 import com.yp.baselib.BaseFragment
 import com.yp.baselib.LayoutId
@@ -32,14 +33,13 @@ class ZhuangRongSubFragment : BaseFragment(), RVInterface, BmpUtils {
 
     val list = ArrayList<ArrayList<ZhuangRongFenLeiShu.Data.Child>>()
 
-    override fun init() {
-    }
+    override fun init() {}
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
         val id = arguments!!.getInt("id")
 
-        Req.getZhuangRongFenLeiShu(id){
+        Req.getZhuangRongFenLeiShu(if(id==-1) OK.OPTIONAL else id.toString()){
             val childList = arrayListOf<ZhuangRongFenLeiShu.Data.Child>()
             it.data.forEach {
                 childList.addAll(it.childList)

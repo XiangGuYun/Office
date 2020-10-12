@@ -10,38 +10,67 @@ import com.yp.oom.R
 import kotlinx.android.synthetic.main.activity_search.*
 import java.io.File
 
+/**
+ * 搜索页
+ */
 @StatusBarColor("#000000")
 @LayoutId(R.layout.activity_search)
-class SearchActivity : BaseActivity(), EditViewUtils, RVInterface {
+class SearchActivity : OfficeBaseActivity(), EditViewUtils, RVInterface {
+
+    private lateinit var wordList: java.util.ArrayList<String>
+
+    private lateinit var fileSearchHistory:File
 
     override fun init(bundle: Bundle?) {
 
-        val fileSearchHistory = File(CACHE, "search_history.txt")
+        fileSearchHistory = File(CACHE, "search_history.txt")
 
         if(!fileSearchHistory.exists()){
             fileSearchHistory.createNewFile()
         }
 
         etSearch.onPressSearch {
-            var searchHistory = fileSearchHistory.readText()
-            if(searchHistory.isEmpty()){
-                searchHistory = etSearch.str
-            } else {
-                searchHistory += ",${etSearch.str}"
-            }
-            fileSearchHistory.writeText(searchHistory)
+            doSearch()
+        }
+
+        ivSearchIcon.click {
+            doSearch()
         }
 
         val searchHistory = fileSearchHistory.readText()
 
-        val wordList = searchHistory.split(",")
+        wordList = ArrayList(searchHistory.split(","))
+        wordList.removeAll {
+            it.isEmpty()
+        }
 
+        // 搜索历史
         rvSearchHistory.wrap.flexBoxManager().rvAdapter(wordList,
             {
                 holder, pos ->
                 holder.tv(R.id.tvSearchWord).text = wordList[pos]
+                holder.itemClick {
+                    goTo<SearchResultActivity>("search" to wordList[pos])
+                }
             }, R.layout.item_search_word)
 
+    }
+
+    private fun doSearch() {
+        if(etSearch.str.isEmpty()) return
+        var searchHistory = fileSearchHistory.readText()
+        if(searchHistory.isEmpty()){
+            searchHistory = etSearch.str
+        } else {
+            searchHistory += ",${etSearch.str}"
+        }
+        fileSearchHistory.writeText(searchHistory)
+
+        wordList.add(etSearch.str)
+
+        rvSearchHistory.update()
+
+        goTo<SearchResultActivity>("search" to etSearch.str)
     }
 
 }

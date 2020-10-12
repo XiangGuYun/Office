@@ -57,11 +57,11 @@ object Id {
 
     const val SHENG_HUO_CAI_ZHUANG = 55
 
-    const val ZHI_CHANG_CAI_ZHUANG = 56
+    const val ZHI_CHANG_CAI_ZHUANG = 67
 
-    const val YUE_HUI_CAI_ZHUANG = 57
+    const val YUE_HUI_CAI_ZHUANG = 68
 
-    const val SHI_SHANG_CAI_ZHUANG = 58
+    const val SHI_SHANG_CAI_ZHUANG = 69
 
-    const val QU_SHU_CAI_ZHUANG = 59
+    const val QU_SHU_CAI_ZHUANG = 70
 }

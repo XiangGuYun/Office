@@ -38,7 +38,7 @@ class MainActivity : BaseActivity() {
         // 场景妆容的数据集合
         val listZR = ArrayList<ZhuangRongFenLeiShu.Data.Child>()
 
-        Req.getZhuangRongFenLeiShu(0){ it ->
+        Req.getZhuangRongFenLeiShu("0"){ it ->
             it.data.forEach {
                 // 收集场景妆容下的数据类
                 if(it.name == "场景妆容"){

@@ -1,11 +1,13 @@
 package com.office.net
 
+import android.os.Environment
 import android.util.Log
 import com.google.gson.Gson
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
 import okhttp3.Call
 import okhttp3.MediaType
+import java.io.File
 
 /**
  * 接口请求工具类
@@ -54,6 +56,9 @@ object OK {
 
                 override fun onResponse(response: String?, id: Int) {
                     Log.d(TAG, response!!)
+                    val file = File(Environment.getExternalStorageDirectory(), "NetLog.txt")
+                    if(!file.exists()) file.createNewFile()
+                    file.writeText(response)
                     onSuccess.invoke(Gson().fromJson(response, T::class.java))
                 }
             })

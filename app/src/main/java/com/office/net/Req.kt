@@ -49,12 +49,12 @@ object Req {
      * 妆容分类树
      * @param id 即父级ID,传0表示查询所有妆容分类
      */
-    fun getZhuangRongFenLeiShu(id: Int, callback: (ZhuangRongFenLeiShu) -> Unit) {
+    fun getZhuangRongFenLeiShu(id: String, callback: (ZhuangRongFenLeiShu) -> Unit) {
         OK.post<ZhuangRongFenLeiShu>(
             URL.ZHUANG_RONG_FEN_LEI_SHU,
             {
                 callback.invoke(it)
-            }, "id" to id.toString()
+            }, "id" to id
         )
     }
 

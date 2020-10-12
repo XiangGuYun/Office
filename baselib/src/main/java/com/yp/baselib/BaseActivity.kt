@@ -76,7 +76,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             StatusBarCompat.setStatusBarColor(this, Color.WHITE)
         }
-
+        beforeInit()
         init(savedInstanceState)
 
         if(startEventBus){
