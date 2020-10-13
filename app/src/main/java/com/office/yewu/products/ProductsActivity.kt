@@ -1,10 +1,12 @@
 package com.office.yewu.products
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Message
 import com.office.constant.Id
 import com.office.constant.MsgWhat
-import com.office.yewu.MainActivity.Companion.numberCJZR
+import com.office.yewu.MainActivity
+import com.office.yewu.OfficeBaseActivity
 import com.office.yewu.StandbyActivity
 import com.yp.baselib.utils.fragment.old.FragmentUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
@@ -22,10 +24,10 @@ import org.greenrobot.eventbus.Subscribe
 @Bus
 @StatusBarColor("#000000")
 @LayoutId(R.layout.activity_products)
-class ProductsActivity : BaseActivity(), RVInterface {
+class ProductsActivity : OfficeBaseActivity(), RVInterface {
 
     private lateinit var productsDetailFragment: CzProductDetailFragment
-    private lateinit var zrDetailFragment:ZhuangRongDetailFragment
+    private lateinit var zrDetailFragment: ZhuangRongDetailFragment
     private lateinit var fu: FragmentUtils<BaseFragment>
 
     /**
@@ -46,11 +48,13 @@ class ProductsActivity : BaseActivity(), RVInterface {
             MsgWhat.SWITCH_TO_DETAIL_PAGE -> {
                 // 根据传过来的产品ID来切换到对应的产品详情页
                 showRightDetailFragment = true
-                if(type == "Products"){
-                    productsDetailFragment = CzProductDetailFragment.newInstance(msg.obj.toString().toInt())
+                if (type == "Products") {
+                    productsDetailFragment =
+                        CzProductDetailFragment.newInstance(msg.obj.toString().toInt())
                     fu.switchFragmentWithStack(productsDetailFragment)
                 } else {
-                    zrDetailFragment = ZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
+                    zrDetailFragment =
+                        ZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
                     fu.switchFragmentWithStack(zrDetailFragment)
                 }
             }
@@ -60,7 +64,7 @@ class ProductsActivity : BaseActivity(), RVInterface {
     override fun onBackPressedSupport() {
         if (showRightDetailFragment) {
             showRightDetailFragment = false
-            if(type == "Products"){
+            if (type == "Products") {
                 productsDetailFragment.pop()
             } else {
                 zrDetailFragment.pop()
@@ -70,7 +74,7 @@ class ProductsActivity : BaseActivity(), RVInterface {
         }
     }
 
-    lateinit var type:String
+    lateinit var type: String
 
     override fun init(bundle: Bundle?) {
 
@@ -83,7 +87,7 @@ class ProductsActivity : BaseActivity(), RVInterface {
         when (type) {
             "Products" -> {
                 listShowTag = arrayListOf(
-                    "新品上市 # NEW IN" to -1,
+                    "新品上市 # NEW IN" to Id.XIN_PIN_SHANG_SHI,
                     "彩妆系列 # BEAUTY ←" to Id.CAI_ZHUANG_XI_LIE,
                     " · 妆前" to Id.ZHUANG_QIAN,
                     " · 底妆" to Id.DI_ZHUANG,
@@ -105,9 +109,11 @@ class ProductsActivity : BaseActivity(), RVInterface {
                 )
             }
             "MakeUp" -> {
-                tvTop.text = "- MAKEUP"
+                tvTop.gone()
+                view23.show()
                 listShowTag = arrayListOf(
-                    "新品上市 # NEW IN" to -1,
+                    "新品上市 # NEW IN" to Id.XIN_PIN_SHANG_SHI,
+                    "- MAKEUP" to Id.MAKE_UP,
                     "局部妆容 # FEATURE" to Id.JU_BU_ZHUANG_RONG,
                     " · 底妆" to Id.DI_ZHUANG_JB,
                     " · 颊妆" to Id.JIA_ZHUANG_JB,
@@ -115,11 +121,20 @@ class ProductsActivity : BaseActivity(), RVInterface {
                     " · 眼妆" to Id.YAN_ZHUANG_JB,
                     " · 唇妆" to Id.CHUN_ZHUANG_JB,
                     "场景妆容 # SCENE" to Id.CHANG_JING_ZHUANG_RONG,
-                    " · 生活彩妆" to if (numberCJZR >= 1) Id.SHENG_HUO_CAI_ZHUANG else -2,
-                    " · 职场彩妆" to if (numberCJZR >= 2) Id.ZHI_CHANG_CAI_ZHUANG else -2,
-                    " · 约会彩妆" to if (numberCJZR >= 3) Id.YUE_HUI_CAI_ZHUANG else -2,
-                    " · 时尚彩妆" to if (numberCJZR >= 4) Id.SHI_SHANG_CAI_ZHUANG else -2,
-                    " · 趋势彩妆" to if (numberCJZR >= 5) Id.QU_SHU_CAI_ZHUANG else -2
+                    " · 生活彩妆" to if (MainActivity.zrNameList.any { it.contains("生活") }) Id.SHENG_HUO_CAI_ZHUANG else Id.NULL,
+                    " · 职场彩妆" to if (MainActivity.zrNameList.any { it.contains("职场") }) Id.ZHI_CHANG_CAI_ZHUANG else Id.NULL,
+                    " · 约会彩妆" to if (MainActivity.zrNameList.any { it.contains("约会") }) Id.YUE_HUI_CAI_ZHUANG else Id.NULL,
+                    " · 时尚彩妆" to if (MainActivity.zrNameList.any { it.contains("时尚") }) Id.SHI_SHANG_CAI_ZHUANG else Id.NULL,
+                    " · 趋势彩妆" to if (MainActivity.zrNameList.any { it.contains("趋势") }) Id.QU_SHU_CAI_ZHUANG else Id.NULL
+                )
+            }
+            "About" -> {
+                tvTop.gone()
+                view23.show()
+                listShowTag = arrayListOf(
+                    "新品上市 # NEW IN" to Id.XIN_PIN_SHANG_SHI,
+                    "- MAKEUP" to Id.MAKE_UP,
+                    "- ABOUT" to Id.ABOUT
                 )
             }
         }
@@ -129,28 +144,22 @@ class ProductsActivity : BaseActivity(), RVInterface {
         }
 
         // 根据标签列表映射出对应的Fragment列表并进行管理
-        fu = FragmentUtils<BaseFragment>(this, ArrayList(listShowTag.mapIndexed { index, s ->
-            when (index) {
-//                0 -> {
-//                    NewProductFragment()
-//                }
-//                1 -> {
-//                    ZhuangRongDetailFragment()
-//                }
-//                list.size - 3 -> {
-//                    CzProductDetailFragment()
-//                }
-//                list.size - 2 -> {
-//                    ZhuangRongFragment()
-//                }
-//                list.size - 1 -> {
-//                    AboutFragment()
-//                }
+        fu = FragmentUtils<BaseFragment>(this, ArrayList(listShowTag.mapIndexed { _, s ->
+            when {
+                s.second == Id.XIN_PIN_SHANG_SHI -> {
+                    NewProductFragment.newInstance(false)
+                }
+                s.second == Id.MAKE_UP -> {
+                    NewProductFragment.newInstance(true)
+                }
+                type == "Products" -> {
+                    ProductsFragment.newInstance(s.second) as BaseFragment
+                }
+                type == "MakeUp" -> {
+                    ZhuangRongSubFragment.newInstance(s.second)
+                }
                 else -> {
-                    if(type == "Products")
-                        ProductsFragment.newInstance(s.second) as BaseFragment
-                    else
-                        ZhuangRongSubFragment.newInstance(s.second)
+                    AboutFragment()
                 }
             }
         }), R.id.flContainer)
@@ -162,23 +171,34 @@ class ProductsActivity : BaseActivity(), RVInterface {
         rvLeft.wrap.rvMultiAdapter(
             listShowTag,
             { h, p ->
-                h.tv(R.id.tv).text = listShowTag[p].first
+                if (listShowTag[p].first.contains("ABOUT") ||
+                    listShowTag[p].first.contains("MAKEUP") ||
+                    listShowTag[p].first.contains("PRODUCTS")
+                ) {
+                    h.tv(R.id.tv).setFont("font/LucidaGrande.ttf").size(8f).typeface =
+                        Typeface.defaultFromStyle(Typeface.BOLD)
+                } else {
+                    h.tv(R.id.tv).size(7f).typeface =
+                        Typeface.defaultFromStyle(Typeface.NORMAL)
+                }
+                if(selectedIndex == p){
+                    h.tv(R.id.tv).text = listShowTag[p].first+" ←"
+                } else {
+                    h.tv(R.id.tv).text = listShowTag[p].first
+                }
                 h.itemClick {
+                    if(selectedIndex == p) return@itemClick
                     selectedIndex = p
                     rvLeft.update()
-
-
                     if (showRightDetailFragment) {
                         showRightDetailFragment = false
-                        if(type == "Products"){
+                        if (type == "Products") {
                             productsDetailFragment.pop()
                         } else {
                             zrDetailFragment.pop()
                         }
                     }
-
                     fu.switch(p)
-//
                 }
             },
             {
@@ -200,3 +220,19 @@ class ProductsActivity : BaseActivity(), RVInterface {
 //            " · 颊妆"," · 眉妆"," · 眼妆"," · 唇妆","场景妆容 # SCENE"," · 生活彩妆"," · 职场彩妆",
 //            " · 约会彩妆"," · 时尚彩妆","· 趋势彩妆", "- ABOUT ←"
 //        )
+
+//                0 -> {
+//                    NewProductFragment()
+//                }
+//                1 -> {
+//                    ZhuangRongDetailFragment()
+//                }
+//                list.size - 3 -> {
+//                    CzProductDetailFragment()
+//                }
+//                list.size - 2 -> {
+//                    ZhuangRongFragment()
+//                }
+//                list.size - 1 -> {
+//                    AboutFragment()
+//                }

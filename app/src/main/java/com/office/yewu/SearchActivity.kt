@@ -8,6 +8,7 @@ import com.yp.baselib.utils.view.edittext.EditViewUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.header.*
 import java.io.File
 
 /**
@@ -22,6 +23,8 @@ class SearchActivity : OfficeBaseActivity(), EditViewUtils, RVInterface {
     private lateinit var fileSearchHistory:File
 
     override fun init(bundle: Bundle?) {
+
+        ivSearch.hide()
 
         fileSearchHistory = File(CACHE, "search_history.txt")
 

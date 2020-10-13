@@ -38,4 +38,9 @@ object URL {
      * 获取基本参数值
      */
     const val GET_BASE_PARAMS = "/common/baseParam/getFirstValue"
+
+    /**
+     * 待机页轮播图
+     */
+    const val BANNER = "/common/mallProduct/waitBanner"
 }

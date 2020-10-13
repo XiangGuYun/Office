@@ -32,19 +32,19 @@
    </FrameLayout>
 
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="· 明星挚爱红毯唇膏 ·\n· 盛世美唇惊艳全场 · "
         android:textColor="#ffffffff"
         android:textSize="8sp"
         android:layout_gravity="center_horizontal"
         />
 
     <TextView
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="欧菲姿OFFICE红毯丝绒唇膏 #6604"
         android:textColor="#ffffffff"
         android:textSize="6sp"
         android:layout_gravity="center_horizontal"
@@ -52,9 +52,9 @@
         />
 
     <TextView
+        android:id="@+id/tvEnName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OFFICE SPOTLIGHT EYE SHADOW PALETTE"
         android:textColor="#ccffffff"
         android:textSize="4sp"
         android:layout_gravity="center_horizontal"

@@ -41,7 +41,7 @@ object Req {
             URL.TUI_JIAN_ZHUANG_RONG_LIE_BIAO,
             {
                 callback.invoke(it)
-            }, "pageNo" to pageNo.toString()
+            }, "pageNo" to pageNo.toString(), "pageSize" to "10"
         )
     }
 
@@ -149,6 +149,16 @@ object Req {
             {
                 callback.invoke(it)
             }, "paramid" to paramid.toString())
+    }
+
+    /**
+     * 获取待机页轮播图数据
+     */
+    fun getBannerInfo(callback: (BannerInfo) -> Unit){
+        OK.post<BannerInfo>(URL.BANNER,
+            {
+                callback.invoke(it)
+            }, "pageNo" to "1", "pageSize" to "10")
     }
 
 }

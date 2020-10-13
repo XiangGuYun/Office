@@ -23,11 +23,19 @@ data class ZhuangRongFenLeiXiangQing(
         val purposeStep: String,
         val purposeStepList: List<PurposeStep>,
         val status: Int,
-        val updateTime: String
+        val title: String,
+        val updateTime: String,
+        val videoDTOList: List<VideoDTO>
     ) {
         data class PurposeStep(
             val stepContent: String,
             val stepName: String
+        )
+
+        data class VideoDTO(
+            val videoCopywriting: String,
+            val videoName: String,
+            val videoUrl: String
         )
     }
 }

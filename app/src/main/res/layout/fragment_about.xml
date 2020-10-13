@@ -8,15 +8,18 @@
     android:orientation="vertical">
     
     <FrameLayout
+        android:layout_marginTop="18dp"
         android:id="@+id/videoView"
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
+        android:layout_marginBottom="2.5dp"
         android:layout_height="146dp">
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#5F5F5F"/>
         <ImageView
+            android:id="@+id/ivPlay"
             android:layout_width="12dp"
             android:layout_height="14dp"
             android:src="@mipmap/play"

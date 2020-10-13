@@ -18,19 +18,20 @@ object OK {
      * 表示所传参数被忽略
      */
     const val OPTIONAL = "optional"
-    
+
     val TAG = "OK_Result"
-    
+
     const val BASE_URL = "http://124.70.156.186:8001"
-    
+
     const val MEDIA_TYPE = "application/json; charset=utf-8"
 
     /**
      * post请求
      */
-    inline fun <reified T> post(url: String, //URL
-                                crossinline onSuccess: (data: T) -> Unit, //成功回调
-                                vararg pairs: Pair<String, String>//参数
+    inline fun <reified T> post(
+        url: String, //URL
+        crossinline onSuccess: (data: T) -> Unit, //成功回调
+        vararg pairs: Pair<String, String>//参数
     ) {
         Log.d(TAG, "url is $url");
 
@@ -57,7 +58,7 @@ object OK {
                 override fun onResponse(response: String?, id: Int) {
                     Log.d(TAG, response!!)
                     val file = File(Environment.getExternalStorageDirectory(), "NetLog.txt")
-                    if(!file.exists()) file.createNewFile()
+                    if (!file.exists()) file.createNewFile()
                     file.writeText(response)
                     onSuccess.invoke(Gson().fromJson(response, T::class.java))
                 }
@@ -66,3 +67,4 @@ object OK {
     }
 
 }
+

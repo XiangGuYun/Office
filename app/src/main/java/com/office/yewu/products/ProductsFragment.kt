@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.kotlinlib.common.LLLP
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.bean.ShangPinFenYeLieBiao
+import com.office.constant.Id
 import com.office.constant.MsgWhat
 import com.office.net.OK
 import com.office.net.Req
@@ -33,9 +34,9 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
         val id = arguments!!.getInt("id")
 
         Req.getShangPinFenYeLieBiao(categoryId = if(id==-1) OK.OPTIONAL else id.toString()) {
+
             val itemSize = it.data.size
             val pageSize = (itemSize + 3) / 4
-
 
             for (i in 0 until pageSize) {
                 list.add(ArrayList())

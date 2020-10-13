@@ -19,12 +19,12 @@ import kotlinx.android.synthetic.main.activity_standby.*
 class StandbyActivity : BaseActivity() {
     override fun init(bundle: Bundle?) {
 
-        Req.getBaseParams(1003){
-            val imgs = it.data.split(",")
+        Req.getBannerInfo {
+            val imgs = it.data
             banner.apply {
                 setDelayTime(3000)
                 setOnBannerListener {
-                  finish()
+                    finish()
                 }
                 setImages(imgs).setImageLoader(GlideImageLoader()).start()
             }

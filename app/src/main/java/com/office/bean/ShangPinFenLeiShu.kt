@@ -40,3 +40,11 @@ data class BaseParams(
     val msg: String,
     val ok: Boolean
 )
+
+data class BannerInfo(
+    val code: Int,
+    val `data`: List<String>,
+    val enmsg: String,
+    val msg: String,
+    val ok: Boolean
+)

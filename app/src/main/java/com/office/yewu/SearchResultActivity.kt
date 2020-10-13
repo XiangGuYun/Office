@@ -12,6 +12,7 @@ import com.yp.baselib.utils.BusUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
 import kotlinx.android.synthetic.main.activity_search_result.*
+import kotlinx.android.synthetic.main.header.*
 
 /**
  * 搜索结果页
@@ -20,6 +21,8 @@ import kotlinx.android.synthetic.main.activity_search_result.*
 @LayoutId(R.layout.activity_search_result)
 class SearchResultActivity : OfficeBaseActivity(), RVInterface, BmpUtils {
     override fun init(bundle: Bundle?) {
+
+        ivSearch.hide()
 
         Req.getShangPinFenYeLieBiao(name = extraStr("search")) {
             rvSearchResult1.wrap.gridManager(3).rvAdapter(it.data,

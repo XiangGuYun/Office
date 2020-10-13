@@ -2,6 +2,14 @@ package com.office.constant
 
 object Id {
 
+    const val ABOUT = -4
+
+    const val MAKE_UP = -3
+
+    const val NULL = -2
+
+    const val XIN_PIN_SHANG_SHI = -1
+
     const val CAI_ZHUANG_XI_LIE = 1
 
     const val ZHUANG_QIAN = 4

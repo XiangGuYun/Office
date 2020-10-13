@@ -46,3 +46,26 @@ data class ZhuangRongFenLeiShu(
     class OtherMap(
     )
 }
+
+//data class ZhuangRongFenLeiShu(
+//    val checkOk: Boolean,
+//    val code: Int,
+//    val `data`: List<Data>,
+//    val enmsg: String,
+//    val msg: String,
+//    val ok: Boolean
+//) {
+//    data class Data(
+//        val bigImg: String,
+//        val childList: List<Any>,
+//        val enName: String,
+//        val id: Int,
+//        val img: String,
+//        val isLeaf: Int,
+//        val linkVideo: String,
+//        val name: String,
+//        val pid: Int,
+//        val purposeDesc: String,
+//        val purposeStep: String
+//    )
+//}

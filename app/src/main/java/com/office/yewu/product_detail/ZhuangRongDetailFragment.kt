@@ -1,6 +1,7 @@
 package com.office.yewu.product_detail
 
 import android.os.Bundle
+import android.text.TextUtils
 import com.kotlinlib.common.LLLP
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.net.Req
@@ -76,17 +77,17 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils {
                     }
                 },R.layout.item_step)
 
-            if(it.data.linkVideo.isNotEmpty()){
-                val videoUrlList = it.data.linkVideo.split(",")
+            if(!TextUtils.isEmpty(it.data.linkVideo)){
+                val videoList = it.data.videoDTOList
                 titleBar2.show().setTitle("相关视频 # VIDEO")
                 rvVideo.wrap.gridManager(2).rvAdapter(
-                    videoUrlList,
+                    videoList,
                     { holder, pos ->
+                        holder.tv(R.id.tvTop).text = videoList[pos].videoName
+                        holder.tv(R.id.tvBtm).text = videoList[pos].videoCopywriting
                         holder.itemClick {
-//                            OfficeVideoActivity.go(getAct(), true, videoUrlList[pos])
-                            goTo<OfficeVideoActivity>("isNetVideo" to true, "path" to videoUrlList[pos])
+                            goTo<OfficeVideoActivity>("isNetVideo" to true, "path" to videoList[pos].videoUrl)
                         }
-//                        loadVideoScreenshot(getAct(), videoUrlList[pos], holder.iv(R.id.ivPreviewFrame), 0)
                     }, R.layout.item_xgsp
                 )
             }

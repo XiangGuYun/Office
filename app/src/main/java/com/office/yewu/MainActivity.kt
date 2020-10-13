@@ -16,21 +16,16 @@ import kotlinx.android.synthetic.main.header.*
  */
 @StatusBarColor("#000000")
 @LayoutId(R.layout.activity_main)
-class MainActivity : BaseActivity() {
+class MainActivity : OfficeBaseActivity() {
 
     companion object{
-        var numberCJZR = 0
+        /**
+         * 场景妆容名称列表
+         */
+        var zrNameList = ArrayList<String>()
     }
 
     override fun init(bundle: Bundle?) {
-
-        ivOffice.click {
-            goTo<StandbyActivity>()
-        }
-
-        ivSearch.click {
-            goTo<SearchActivity>()
-        }
 
         // 场景妆容区域的六个按钮，其显示与否根据后端动态返回决定
         val btnZrList = listOf(btnCJZR1, btnCJZR2, btnCJZR3, btnCJZR4, btnCJZR5, btnCJZR6)
@@ -46,10 +41,9 @@ class MainActivity : BaseActivity() {
                 }
             }
 
-            numberCJZR = listZR.size
-
             listZR.forEachIndexed { index, child ->
                 // 根据场景妆容数据类；来决定这个区域按钮显示和名称
+                zrNameList.add(child.name)
                 btnZrList[index].show().text = child.name
             }
         }
@@ -124,62 +118,62 @@ class MainActivity : BaseActivity() {
         局部妆容
          */
         btnMakeUp.click{
-            goTo<ProductsActivity>("type" to "MakeUp", "index" to 0)
-        }
-
-        btnDiZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 1)
         }
 
-        btnJiaZhuangJB.click {
+        btnDiZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 2)
         }
 
-        btnMeiZhuangJB.click {
+        btnJiaZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 3)
         }
 
-        btnYanZhuangJB.click {
+        btnMeiZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 4)
         }
 
-        btnChunZhuangJB.click {
+        btnYanZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 5)
         }
 
-        btnCJZR.click {
+        btnChunZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 6)
         }
 
-        btnCJZR1.click {
+        btnCJZR.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 7)
         }
 
-        btnCJZR2.click {
+        btnCJZR1.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 8)
         }
 
-        btnCJZR3.click {
+        btnCJZR2.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 9)
         }
 
-        btnCJZR4.click {
+        btnCJZR3.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 10)
         }
 
-        btnCJZR5.click {
+        btnCJZR4.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 11)
         }
 
-        btnCJZR6.click {
+        btnCJZR5.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 12)
+        }
+
+        btnCJZR6.click {
+            goTo<ProductsActivity>("type" to "MakeUp", "index" to 13)
         }
 
         /*
         about
          */
         flAbout.click {
-
+            goTo<ProductsActivity>("type" to "About", "index" to 0)
         }
     }
 
