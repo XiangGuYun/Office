@@ -18,10 +18,11 @@ import kotlinx.android.synthetic.main.fragment_product_gallery.*
 class ProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
 
     companion object {
-        fun newInstance(imgUrls: String): ProductGalleryFragment {
+        fun newInstance(imgUrls: String, isAttachDetailActivity:Boolean = false): ProductGalleryFragment {
             return ProductGalleryFragment().apply {
                 arguments = Bundle().apply {
                     putString("imgUrls", imgUrls)
+                    putBoolean("isAttachDetailActivity", isAttachDetailActivity)
                 }
             }
         }
@@ -31,13 +32,18 @@ class ProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
 
         val imgUrls = arguments!!.getString("imgUrls")
 
+        val isAttachDetailActivity = arguments!!.getBoolean("isAttachDetailActivity")
+
         imgUrls?.let {
             if (imgUrls.isEmpty()) return@let
 
             val imgUrlList = imgUrls.split(",")
 
             vpGallery.doLP<LLLP> {
-                val size = getAct().srnWidth - 100.dp - 20.dp
+                val size = if(!isAttachDetailActivity)
+                    getAct().srnWidth - 100.dp - 20.dp
+                else
+                    getAct().srnWidth - 40.dp
                 it.width = size
                 it.height = size
             }

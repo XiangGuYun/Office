@@ -30,6 +30,8 @@
             android:layout_height="30dp"
             android:textColor="#ffffff"
             android:textSize="18sp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:background="@null" />
         <ImageView
             android:id="@+id/ivSearchIcon"

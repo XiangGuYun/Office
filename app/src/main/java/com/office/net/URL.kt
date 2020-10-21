@@ -43,4 +43,11 @@ object URL {
      * 待机页轮播图
      */
     const val BANNER = "/common/mallProduct/waitBanner"
+
+    /**
+     * 搜索妆容
+     */
+    const val SEARCH_ZHUANG_RONG = "/common/purpose/searchList"
+
+    const val GUAN_LIAN_SHANG_PIN_LIE_BIAO = "/common/purpose/linklist"
 }

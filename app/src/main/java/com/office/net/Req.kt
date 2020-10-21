@@ -161,4 +161,24 @@ object Req {
             }, "pageNo" to "1", "pageSize" to "10")
     }
 
+    /**
+     * 搜索妆容
+     */
+    fun searchZhuangRong(name:String, callback: (ZhuangRongSearch) -> Unit){
+        OK.post<ZhuangRongSearch>(URL.SEARCH_ZHUANG_RONG,
+            {
+                callback.invoke(it)
+            }, "name" to name)
+    }
+
+    /**
+     * 关联商品列表
+     */
+    fun getLinkProducts(id:Int, callback: (LinkProduct) -> Unit){
+        OK.post<LinkProduct>(URL.GUAN_LIAN_SHANG_PIN_LIE_BIAO,
+            {
+                callback.invoke(it)
+            }, "id" to id.toString())
+    }
+
 }

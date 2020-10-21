@@ -22,13 +22,19 @@ data class ShangPinXiangQing(
         val productParam: String,
         val productVideo: String,
         val titleList: String,
-        val skuType: Int
+        val skuType: Int,
+        val videoDTOList: List<VideoDTO>
     ) {
         data class MallSkuDetail(
             val id: Int,
             val productImg: String,
             val productModel: String,
             val skuIcon: String
+        )
+        data class VideoDTO(
+            val videoCopywriting: String,
+            val videoName: String,
+            val videoUrl: String
         )
     }
 

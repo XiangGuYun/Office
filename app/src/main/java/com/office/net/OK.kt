@@ -57,9 +57,6 @@ object OK {
 
                 override fun onResponse(response: String?, id: Int) {
                     Log.d(TAG, response!!)
-                    val file = File(Environment.getExternalStorageDirectory(), "NetLog.txt")
-                    if (!file.exists()) file.createNewFile()
-                    file.writeText(response)
                     onSuccess.invoke(Gson().fromJson(response, T::class.java))
                 }
             })

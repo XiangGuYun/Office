@@ -40,7 +40,7 @@ class MainActivity : OfficeBaseActivity() {
                     listZR.addAll(it.childList)
                 }
             }
-
+            listZR.reverse()
             listZR.forEachIndexed { index, child ->
                 // 根据场景妆容数据类；来决定这个区域按钮显示和名称
                 zrNameList.add(child.name)
@@ -121,59 +121,63 @@ class MainActivity : OfficeBaseActivity() {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 1)
         }
 
-        btnDiZhuangJB.click {
+        btnJuBuZhuangRong.click{
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 2)
         }
 
-        btnJiaZhuangJB.click {
+        btnDiZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 3)
         }
 
-        btnMeiZhuangJB.click {
+        btnJiaZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 4)
         }
 
-        btnYanZhuangJB.click {
+        btnMeiZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 5)
         }
 
-        btnChunZhuangJB.click {
+        btnYanZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 6)
         }
 
-        btnCJZR.click {
+        btnChunZhuangJB.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 7)
         }
 
-        btnCJZR1.click {
+        btnCJZR.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 8)
         }
 
-        btnCJZR2.click {
+        btnCJZR1.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 9)
         }
 
-        btnCJZR3.click {
+        btnCJZR2.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 10)
         }
 
-        btnCJZR4.click {
+        btnCJZR3.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 11)
         }
 
-        btnCJZR5.click {
+        btnCJZR4.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 12)
         }
 
-        btnCJZR6.click {
+        btnCJZR5.click {
             goTo<ProductsActivity>("type" to "MakeUp", "index" to 13)
+        }
+
+        btnCJZR6.click {
+            goTo<ProductsActivity>("type" to "MakeUp", "index" to 14)
         }
 
         /*
         about
          */
         flAbout.click {
-            goTo<ProductsActivity>("type" to "About", "index" to 0)
+            goTo<ProductsActivity>("type" to "About", "index" to 2)
         }
     }
 

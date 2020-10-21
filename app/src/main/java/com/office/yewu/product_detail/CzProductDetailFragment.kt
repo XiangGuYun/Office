@@ -3,6 +3,7 @@ package com.office.yewu.product_detail
 import android.os.Bundle
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.net.Req
+import com.office.yewu.OfficeVideoActivity
 import com.yp.baselib.BaseFragment
 import com.yp.baselib.LayoutId
 import com.yp.baselib.utils.fragment.old.FragmentUtils
@@ -15,17 +16,18 @@ import kotlinx.android.synthetic.main.fragment_cz_pd.*
  */
 @LayoutId(R.layout.fragment_cz_pd)
 class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
-    private lateinit var fu: FragmentUtils<ProductGalleryFragment>
+    private var fu: FragmentUtils<ProductGalleryFragment>? = null
 
     private val SINGLE_COLOR = 1
 
     private val MULTI_COLOR = 2
 
     companion object {
-        fun newInstance(id: Int): CzProductDetailFragment {
+        fun newInstance(id: Int, isAttachDetailActivity: Boolean = false): CzProductDetailFragment {
             return CzProductDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)
+                    putBoolean("isAttachDetailActivity", isAttachDetailActivity)
                 }
             }
         }
@@ -36,17 +38,27 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
         Req.getShangPinXiangQing(arguments!!.getInt("id")) {
             // 轮播图
             val bannerImgList = it.data.bannerImg.split(",")
-            fu = FragmentUtils<ProductGalleryFragment>(
-                getAct(),
-                ArrayList(it.data.mallSkuDetailList.map { ProductGalleryFragment.newInstance(it.productImg) }
-                    .toList()),
-                R.id.flContainerPD
-            )
+            if (it.data.mallSkuDetailList.isNotEmpty()) {
+                fu = FragmentUtils<ProductGalleryFragment>(
+                    getAct(),
+                    ArrayList(it.data.mallSkuDetailList.map {
+                        ProductGalleryFragment.newInstance(
+                            it.productImg,
+                            arguments!!.getBoolean("isAttachDetailActivity")
+                        )
+                    }
+                        .toList()),
+                    R.id.flContainerPD
+                )
+            } else {
+                flContainerPD.gone()
+            }
 
             var selectedIndex = 0
 
             // 当前选择的颜色值
-            tvColor.text = it.data.mallSkuDetailList[0].productModel
+            if (it.data.mallSkuDetailList.isNotEmpty())
+                tvColor.text = it.data.mallSkuDetailList[0].productModel
 
             // 产品参数
             tvProductParams.text = it.data.productParam
@@ -55,30 +67,39 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
             tvProductCharacter.text = it.data.productCharacter
 
             // 相关视频
-            val videoList = it.data.productVideo.split(",").toList()
+            val videoList = it.data.videoDTOList
             rvVideo.wrap.gridManager(2).rvAdapter(
                 videoList,
                 { holder, pos ->
-                    loadVideoScreenshot(getAct(), videoList[pos], holder.iv(R.id.ivPreviewFrame), 0)
+                    holder.tv(R.id.tvTop).text = videoList[pos].videoName
+                    holder.tv(R.id.tvBtm).text = videoList[pos].videoCopywriting
+                    holder.itemClick {
+                        goTo<OfficeVideoActivity>(
+                            "isNetVideo" to true,
+                            "path" to videoList[pos].videoUrl
+                        )
+                    }
                 }, R.layout.item_xgsp
             )
 
             // 颜色图片列表
             when (it.data.skuType) {
                 SINGLE_COLOR -> {
+                    val list = it.data.mallSkuDetailList
                     rvColor.wrap.gridManager(12).rvAdapter(
-                        it.data.mallSkuDetailList,
+                        list,
                         { holder, pos ->
-                            tvColor.text = it.data.mallSkuDetailList[pos].productModel
+                            tvColor.text = list[pos].productModel
                             showBitmap(
                                 getAct(),
                                 holder.iv(R.id.ivColor),
-                                it.data.mallSkuDetailList[pos].skuIcon
+                                list[pos].skuIcon
                             )
                             holder.v(R.id.mask).showOrGone(selectedIndex != pos)
                             holder.itemClick {
                                 selectedIndex = pos
-                                fu.switch(pos)
+                                tvColor.text = list[pos].productModel
+                                fu?.switch(pos)
                                 rvColor.update()
                             }
                         }, R.layout.item_color
@@ -95,9 +116,10 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
                                 it.data.mallSkuDetailList[pos].skuIcon
                             )
                             holder.v(R.id.mask).showOrGone(selectedIndex != pos)
-                            holder.itemClick {
+                            holder.itemClick { v ->
                                 selectedIndex = pos
-                                fu.switch(pos)
+                                tvColor.text = it.data.mallSkuDetailList[pos].productModel
+                                fu?.switch(pos)
                                 rvColor.update()
                             }
                         }, R.layout.item_color_multi

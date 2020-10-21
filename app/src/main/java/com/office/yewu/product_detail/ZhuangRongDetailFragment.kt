@@ -20,10 +20,11 @@ import kotlinx.android.synthetic.main.fragment_zr_detail.*
 class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils {
 
     companion object {
-        fun newInstance(id: Int): ZhuangRongDetailFragment {
+        fun newInstance(id: Int, isAttachDetailActivity:Boolean = false): ZhuangRongDetailFragment {
             return ZhuangRongDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)
+                    putBoolean("isAttachDetailActivity", isAttachDetailActivity)
                 }
             }
         }
@@ -38,15 +39,36 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils {
 
             tvZrDesc.text = it.data.purposeDesc
 
-            Req.getShangPinFenYeLieBiao(purposeId = it.data.id.toString()){
+//            Req.getShangPinFenYeLieBiao(purposeId = it.data.id.toString()){
+//                if(it.data.isNotEmpty()){
+//                    tvRelationProducts.show()
+//                    rvRelationProducts.show()
+//                    rvRelationProducts.wrap.managerHorizontal().rvAdapter(it.data,
+//                        {
+//                            holder, pos ->
+//                            // 关联产品
+//                            showBitmap(getAct(), holder.iv(R.id.ivRelProducts), it.data[pos].imgCover)
+//                            holder.itemClick {v->
+//                                goTo<ProductDetailActivity>("id" to it.data[pos].id,
+//                                    "type" to "Product")
+//                            }
+//                        }, R.layout.item_glcp)
+//                }
+//            }
+
+            Req.getLinkProducts(it.data.id){
                 if(it.data.isNotEmpty()){
                     tvRelationProducts.show()
                     rvRelationProducts.show()
                     rvRelationProducts.wrap.managerHorizontal().rvAdapter(it.data,
                         {
-                            holder, pos ->
+                                holder, pos ->
                             // 关联产品
                             showBitmap(getAct(), holder.iv(R.id.ivRelProducts), it.data[pos].imgCover)
+                            holder.itemClick {v->
+                                goTo<ProductDetailActivity>("id" to it.data[pos].linkId,
+                                    "type" to "Product")
+                            }
                         }, R.layout.item_glcp)
                 }
             }
@@ -97,7 +119,11 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils {
         }
 
         ivZrDetail.doLP<LLLP> {
-            it.width = getAct().srnWidth - 100.dp - 20.dp
+            if(!arguments!!.getBoolean("isAttachDetailActivity")){
+                it.width = getAct().srnWidth - 100.dp - 20.dp
+            } else {
+                it.width = getAct().srnWidth - 60.dp
+            }
             it.height = it.width
         }
 

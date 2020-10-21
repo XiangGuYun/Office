@@ -23,6 +23,7 @@ import android.widget.*
 import com.jakewharton.rxbinding2.view.RxView
 import com.kotlinlib.common.DensityUtils.Companion.dip2px
 import com.kotlinlib.common.listener.OnSeekBarChange
+import com.yp.baselib.FragPagerUtils
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -723,6 +724,30 @@ interface ViewUtils {
             }
         }
         this.adapter = pagerAdapter
+    }
+
+    /**
+     * 绑定TabLayout
+     */
+    fun ViewPager.bindTabLayout( tabLayout: TabLayout,
+                                 tabCount:Int,
+                                 isScroll: Boolean,
+                                 listener: FragPagerUtils.TabListener){
+        if (isScroll) {
+            tabLayout.tabMode = TabLayout.MODE_SCROLLABLE //设置滑动Tab模式
+        } else {
+            tabLayout.tabMode = TabLayout.MODE_FIXED //设置固定Tab模式
+        }
+        for (i in 0 until tabCount) {
+            val tab: TabLayout.Tab = tabLayout.newTab()
+            tabLayout.addTab(tab)
+        }
+        //将TabLayout和ViewPager关联起来
+        tabLayout.setupWithViewPager(this, true)
+        //Tab属性必须在关联ViewPager之后设置
+        for (i in 0 until tabCount) {
+            listener.setTabContent(tabLayout.getTabAt(i), i)
+        }
     }
 
 }

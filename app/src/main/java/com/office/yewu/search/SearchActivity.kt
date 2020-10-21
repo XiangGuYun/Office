@@ -1,7 +1,7 @@
-package com.office.yewu
+package com.office.yewu.search
 
 import android.os.Bundle
-import com.yp.baselib.BaseActivity
+import com.office.yewu.OfficeBaseActivity
 import com.yp.baselib.LayoutId
 import com.yp.baselib.StatusBarColor
 import com.yp.baselib.utils.view.edittext.EditViewUtils
