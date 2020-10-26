@@ -1,5 +1,7 @@
 package com.office.net
 
+import android.widget.Toast
+import com.office.app.MyApplication
 import com.office.bean.*
 
 /**
@@ -14,7 +16,11 @@ object Req {
         OK.post<ZhuangRongFenLeiXiangQing>(
             URL.ZHUANG_RONG_FEN_LEI_XIANG_QING,
             {
-                callback.invoke(it)
+                if(it.code != 0){
+                    Toast.makeText(MyApplication.instance.context(), it.msg, Toast.LENGTH_SHORT)
+                } else {
+                    callback.invoke(it)
+                }
             }, "id" to id.toString()
         )
     }

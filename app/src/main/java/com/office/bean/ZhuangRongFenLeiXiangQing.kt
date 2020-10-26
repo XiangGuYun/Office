@@ -8,7 +8,7 @@ data class ZhuangRongFenLeiXiangQing(
     val ok: Boolean
 ) {
     data class Data(
-        val bigImg: String,
+        val bigImg: String?,
         val cateSort: Int,
         val createTime: String,
         val enName: String,
@@ -25,7 +25,8 @@ data class ZhuangRongFenLeiXiangQing(
         val status: Int,
         val title: String,
         val updateTime: String,
-        val videoDTOList: List<VideoDTO>
+        val videoDTOList: List<VideoDTO>,
+        val imgCover:String
     ) {
         data class PurposeStep(
             val stepContent: String,

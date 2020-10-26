@@ -3,6 +3,7 @@ package com.office.yewu.products
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Message
+import com.office.bean.ZhuangRongFenLeiShu
 import com.office.constant.Id
 import com.office.constant.MsgWhat
 import com.office.yewu.MainActivity
@@ -120,13 +121,17 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
                     " · 眉妆" to Id.MEI_ZHUANG_JB,
                     " · 眼妆" to Id.YAN_ZHUANG_JB,
                     " · 唇妆" to Id.CHUN_ZHUANG_JB,
-                    "场景妆容 # SCENE" to Id.CHANG_JING_ZHUANG_RONG,
-                    " · 生活彩妆" to if (MainActivity.zrNameList.any { it.contains("生活") }) Id.SHENG_HUO_CAI_ZHUANG else Id.NULL,
-                    " · 职场彩妆" to if (MainActivity.zrNameList.any { it.contains("职场") }) Id.ZHI_CHANG_CAI_ZHUANG else Id.NULL,
-                    " · 约会彩妆" to if (MainActivity.zrNameList.any { it.contains("约会") }) Id.YUE_HUI_CAI_ZHUANG else Id.NULL,
-                    " · 时尚彩妆" to if (MainActivity.zrNameList.any { it.contains("时尚") }) Id.SHI_SHANG_CAI_ZHUANG else Id.NULL,
-                    " · 趋势彩妆" to if (MainActivity.zrNameList.any { it.contains("趋势") }) Id.QU_SHU_CAI_ZHUANG else Id.NULL
+                    "场景妆容 # SCENE" to Id.CHANG_JING_ZHUANG_RONG
+//                    " · 生活彩妆" to if (MainActivity.zrNameList.any { it.contains("生活") }) Id.SHENG_HUO_CAI_ZHUANG else Id.NULL,
+//                    " · 职场彩妆" to if (MainActivity.zrNameList.any { it.contains("职场") }) Id.ZHI_CHANG_CAI_ZHUANG else Id.NULL,
+//                    " · 约会彩妆" to if (MainActivity.zrNameList.any { it.contains("约会") }) Id.YUE_HUI_CAI_ZHUANG else Id.NULL,
+//                    " · 时尚彩妆" to if (MainActivity.zrNameList.any { it.contains("时尚") }) Id.SHI_SHANG_CAI_ZHUANG else Id.NULL,
+//                    " · 趋势彩妆" to if (MainActivity.zrNameList.any { it.contains("趋势") }) Id.QU_SHU_CAI_ZHUANG else Id.NULL
                 )
+                val listZR = extraSerial("listZR") as ArrayList<ZhuangRongFenLeiShu.Data.Child>?
+                listZR?.forEach {
+                    listShowTag.add(" · ${it.name}" to it.id)
+                }
             }
             "About" -> {
                 tvTop.gone()

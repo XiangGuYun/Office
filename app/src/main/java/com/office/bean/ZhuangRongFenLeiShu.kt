@@ -1,5 +1,7 @@
 package com.office.bean
 
+import java.io.Serializable
+
 data class ZhuangRongFenLeiShu(
     val checkOk: Boolean,
     val code: Int,
@@ -9,7 +11,7 @@ data class ZhuangRongFenLeiShu(
     val msg: String,
     val ok: Boolean,
     val otherMap: OtherMap
-) {
+)  : Serializable {
     data class Data(
         val bigImg: String,
         val childList: List<Child>,
@@ -23,7 +25,7 @@ data class ZhuangRongFenLeiShu(
         val purposeDesc: String,
         val purposeStep: String,
         val title: String
-    ) {
+    )  : Serializable {
         data class Child(
             val bigImg: String,
             val childList: List<Child>,
@@ -37,9 +39,9 @@ data class ZhuangRongFenLeiShu(
             val purposeDesc: String,
             val purposeStep: String,
             val title: String
-        ) {
+        )  : Serializable{
             class Child(
-            )
+            ) : Serializable
         }
     }
 

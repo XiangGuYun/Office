@@ -1,6 +1,7 @@
 package com.office.yewu.product_detail
 
 import android.os.Bundle
+import com.kotlinlib.common.LLLP
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.net.Req
 import com.office.yewu.OfficeVideoActivity
@@ -34,6 +35,13 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
     }
 
     override fun init() {
+
+        flContainerPD.post {
+            flContainerPD.doLP<LLLP> {
+                it.width = getAct().srnWidth-120.dp
+                it.height = getAct().srnWidth-120.dp
+            }
+        }
 
         Req.getShangPinXiangQing(arguments!!.getInt("id")) {
             // 轮播图
@@ -71,6 +79,7 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
             rvVideo.wrap.gridManager(2).rvAdapter(
                 videoList,
                 { holder, pos ->
+                    showBitmap(getAct(), holder.iv(R.id.ivPreviewFrame), videoList[pos].videoUrl+"?x-oss-process=video/snapshot,t_1000,f_png,w_0,h_0,m_fast")
                     holder.tv(R.id.tvTop).text = videoList[pos].videoName
                     holder.tv(R.id.tvBtm).text = videoList[pos].videoCopywriting
                     holder.itemClick {

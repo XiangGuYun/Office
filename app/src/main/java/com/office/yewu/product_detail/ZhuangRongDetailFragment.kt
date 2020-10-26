@@ -35,6 +35,7 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils {
         val id = arguments!!.getInt("id")
 
         Req.getZhuangRongFenLeiXiangQing(id){
+
             showBitmap(getAct(), ivZrDetail, it.data.bigImg)
 
             tvZrDesc.text = it.data.purposeDesc
@@ -105,6 +106,7 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils {
                 rvVideo.wrap.gridManager(2).rvAdapter(
                     videoList,
                     { holder, pos ->
+                        showBitmap(getAct(), holder.iv(R.id.ivPreviewFrame), videoList[pos].videoUrl+"?x-oss-process=video/snapshot,t_1000,f_png,w_0,h_0,m_fast")
                         holder.tv(R.id.tvTop).text = videoList[pos].videoName
                         holder.tv(R.id.tvBtm).text = videoList[pos].videoCopywriting
                         holder.itemClick {
