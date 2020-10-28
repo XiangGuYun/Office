@@ -20,7 +20,7 @@
             android:layout_marginBottom="6dp"
             android:text="- PRODUCTS"
             android:textColor="#ffffffff"
-            android:textSize="8sp" />
+            android:textSize="9sp" />
 
         <View
             android:layout_width="match_parent"

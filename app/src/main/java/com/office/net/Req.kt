@@ -17,7 +17,7 @@ object Req {
             URL.ZHUANG_RONG_FEN_LEI_XIANG_QING,
             {
                 if(it.code != 0){
-                    Toast.makeText(MyApplication.instance.context(), it.msg, Toast.LENGTH_SHORT)
+                    Toast.makeText(MyApplication.instance.context(), it.msg, Toast.LENGTH_SHORT).show()
                 } else {
                     callback.invoke(it)
                 }

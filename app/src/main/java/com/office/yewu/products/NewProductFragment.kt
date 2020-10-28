@@ -65,14 +65,17 @@ class NewProductFragment : BaseFragment(), BmpUtils {
                 val iv = getAct().inflate(R.layout.iv_gallery) as ImageView
                 showBitmap(getAct(), iv, data[it].bigImg)
                 iv.click {v->
+                    (getAct() as ProductsActivity).isDetailPage = false
                     BusUtils.post(MsgWhat.SWITCH_TO_DETAIL_PAGE, data[it].id)
                 }
                 iv
             }
 
-            tvTitle.text = data[0].purposeDesc
-            tvName.text = data[0].name
-            tvEnName.text = data[0].enName
+            if(data.isNotEmpty()){
+                tvTitle.text = data[0].purposeDesc
+                tvName.text = data[0].name
+                tvEnName.text = data[0].enName
+            }
 
             vpNewProduct.setOnPageChangeListener(object :OnPageChange{
                 override fun onPageSelected(position: Int) {
@@ -102,6 +105,7 @@ class NewProductFragment : BaseFragment(), BmpUtils {
                 val iv = getAct().inflate(R.layout.iv_gallery) as ImageView
                 showBitmap(getAct(), iv, data[it].imgCover)
                 iv.click {v->
+                    (getAct() as ProductsActivity).isDetailPage = true
                     BusUtils.post(MsgWhat.SWITCH_TO_DETAIL_PAGE, data[it].id)
                 }
                 iv

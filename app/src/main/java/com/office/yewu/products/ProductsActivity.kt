@@ -30,6 +30,7 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
     private lateinit var productsDetailFragment: CzProductDetailFragment
     private lateinit var zrDetailFragment: ZhuangRongDetailFragment
     private lateinit var fu: FragmentUtils<BaseFragment>
+    var isDetailPage = false
 
     /**
      * 右侧详情Fragment是否处于显示状态
@@ -49,7 +50,7 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
             MsgWhat.SWITCH_TO_DETAIL_PAGE -> {
                 // 根据传过来的产品ID来切换到对应的产品详情页
                 showRightDetailFragment = true
-                if (type == "Products") {
+                if (type == "Products" || isDetailPage) {
                     productsDetailFragment =
                         CzProductDetailFragment.newInstance(msg.obj.toString().toInt())
                     fu.switchFragmentWithStack(productsDetailFragment)
@@ -65,7 +66,7 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
     override fun onBackPressedSupport() {
         if (showRightDetailFragment) {
             showRightDetailFragment = false
-            if (type == "Products") {
+            if (type == "Products" || isDetailPage) {
                 productsDetailFragment.pop()
             } else {
                 zrDetailFragment.pop()
@@ -180,10 +181,10 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
                     listShowTag[p].first.contains("MAKEUP") ||
                     listShowTag[p].first.contains("PRODUCTS")
                 ) {
-                    h.tv(R.id.tv).setFont("font/LucidaGrande.ttf").size(8f).typeface =
+                    h.tv(R.id.tv).setFont("font/LucidaGrande.ttf").size(9f).typeface =
                         Typeface.defaultFromStyle(Typeface.BOLD)
                 } else {
-                    h.tv(R.id.tv).size(7f).typeface =
+                    h.tv(R.id.tv).size(8f).typeface =
                         Typeface.defaultFromStyle(Typeface.NORMAL)
                 }
                 if(selectedIndex == p){

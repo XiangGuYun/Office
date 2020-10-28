@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="# 关联产品"
         android:textColor="#ffffffff"
-        android:textSize="6sp"
+        android:textSize="7sp"
         android:layout_marginTop="10dp"
         />
     <android.support.v7.widget.RecyclerView
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:textColor="#ffffff"
-        android:textSize="6sp"
+        android:textSize="7sp"
         android:lineSpacingExtra="1dp"
         android:layout_marginTop="10dp"
         android:id="@+id/tvZrDesc"/>

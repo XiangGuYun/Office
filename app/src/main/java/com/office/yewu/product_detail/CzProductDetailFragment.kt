@@ -45,7 +45,7 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
 
         Req.getShangPinXiangQing(arguments!!.getInt("id")) {
             // 轮播图
-            val bannerImgList = it.data.bannerImg.split(",")
+//            val bannerImgList = it.data.bannerImg.split(",")
             if (it.data.mallSkuDetailList.isNotEmpty()) {
                 fu = FragmentUtils<ProductGalleryFragment>(
                     getAct(),

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="HY08"
         android:textColor="#ff939393"
-        android:textSize="6sp"
+        android:textSize="7sp"
         android:paddingLeft="8.5dp"
         android:paddingRight="8.5dp"
         android:paddingTop="1dp"

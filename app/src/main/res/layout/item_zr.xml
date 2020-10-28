@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="底妆"
             android:textColor="#ffffffff"
-            android:textSize="6sp"
+            android:textSize="7sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
             />

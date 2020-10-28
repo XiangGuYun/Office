@@ -37,7 +37,7 @@
                     android:paddingBottom="2.5dp"
                     android:text="PRODUCTS"
                     android:textColor="#ff000000"
-                    android:textSize="8sp"
+                    android:textSize="9sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -78,7 +78,7 @@
                     android:gravity="center"
                     android:text="妆前"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -92,7 +92,7 @@
                     android:gravity="center"
                     android:text="底妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -106,7 +106,7 @@
                     android:gravity="center"
                     android:text="定妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -120,7 +120,7 @@
                     android:gravity="center"
                     android:text="颊妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -134,7 +134,7 @@
                     android:gravity="center"
                     android:text="眉妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -148,7 +148,7 @@
                     android:gravity="center"
                     android:text="眼妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -162,7 +162,7 @@
                     android:gravity="center"
                     android:text="唇妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -176,7 +176,7 @@
                     android:gravity="center"
                     android:text="卸妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="1dp"
@@ -213,7 +213,7 @@
                     android:gravity="center"
                     android:text="面部清洁"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -227,7 +227,7 @@
                     android:gravity="center"
                     android:text="面部护理"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -241,7 +241,7 @@
                     android:gravity="center"
                     android:text="眼部护理"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -255,7 +255,7 @@
                     android:gravity="center"
                     android:text="唇部护理"
                     android:textColor="#000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="0dp"
@@ -345,7 +345,7 @@
                     android:paddingBottom="2.5dp"
                     android:text="MAKEUP"
                     android:textColor="#ff000000"
-                    android:textSize="8sp"
+                    android:textSize="9sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -385,7 +385,7 @@
                     android:gravity="center"
                     android:text="底妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -399,7 +399,7 @@
                     android:gravity="center"
                     android:text="颊妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -413,7 +413,7 @@
                     android:gravity="center"
                     android:text="眉妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -427,7 +427,7 @@
                     android:gravity="center"
                     android:text="眼妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="10dp"
@@ -441,7 +441,7 @@
                     android:gravity="center"
                     android:text="唇妆"
                     android:textColor="#ff000000"
-                    android:textSize="6sp" />
+                    android:textSize="7sp" />
 
                 <View
                     android:layout_width="0dp"
@@ -461,7 +461,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/rvChangJingZhuangRong"/>
@@ -485,7 +485,7 @@
 <!--                    android:gravity="center"-->
 <!--                    android:text="生活彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="6sp"-->
+<!--                    android:textSize="7sp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--                <View-->
@@ -500,7 +500,7 @@
 <!--                    android:gravity="center"-->
 <!--                    android:text="职场彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="6sp"-->
+<!--                    android:textSize="7sp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--                <View-->
@@ -515,7 +515,7 @@
 <!--                    android:gravity="center"-->
 <!--                    android:text="约会彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="6sp"-->
+<!--                    android:textSize="7sp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--                <View-->
@@ -530,7 +530,7 @@
 <!--                    android:gravity="center"-->
 <!--                    android:text="时尚彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="6sp"-->
+<!--                    android:textSize="7sp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--                <View-->
@@ -545,7 +545,7 @@
 <!--                    android:gravity="center"-->
 <!--                    android:text="趋势彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="6sp"-->
+<!--                    android:textSize="7sp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--&lt;!&ndash;                <View&ndash;&gt;-->
@@ -572,7 +572,7 @@
 <!--                    android:gravity="center"-->
 <!--                    android:text="趋势彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="6sp"-->
+<!--                    android:textSize="7sp"-->
 <!--                    android:visibility="gone" />-->
 
 <!--                <View-->
@@ -599,7 +599,7 @@
                     android:paddingBottom="2.5dp"
                     android:text="ABOUT"
                     android:textColor="#ff000000"
-                    android:textSize="8sp"
+                    android:textSize="9sp"
                     android:textStyle="bold" />
 
                 <ImageView

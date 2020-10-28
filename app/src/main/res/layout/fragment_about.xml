@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:text="明星化妆师创立，源自1953年。"
         android:textColor="#ffffffff"
-        android:textSize="6sp"
+        android:textSize="7sp"
         />
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="12.5dp"
         android:textColor="#ffffffff"
-        android:textSize="3sp"
+        android:textSize="4.5sp"
         android:text="@string/story"
         android:lineSpacingExtra="1dp"
         />
@@ -70,7 +70,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="5dp"
         android:textColor="#ffffffff"
-        android:textSize="3sp"
+        android:textSize="4.5sp"
         android:text="@string/story1"
         android:lineSpacingExtra="1dp"
         />
@@ -82,7 +82,7 @@
         android:layout_marginTop="10dp"
         android:text="1950年， 意大利贵族化妆师George Burton(乔吉.伯顿）应邀进入好莱坞担任化妆师，在好莱坞电影兴盛的年代，创作了无数经典荧幕妆容，曾多年为奥黛丽·赫本化妆，成为挚友。"
         android:textColor="#ffffffff"
-        android:textSize="5sp"
+        android:textSize="6.5sp"
         android:lineSpacingExtra="1dp"
         />
 
@@ -93,7 +93,7 @@
         android:layout_marginTop="5dp"
         android:text="1953年，奥黛丽•赫本主演电影《罗马假日》热映，时尚圈刮起“赫本风”，George Burton（乔吉.伯顿）创作的赫本妆容引起轰动。钟爱彩妆艺术创作的George Burton(乔吉.伯顿）着手研制化妆品，一改当时演员们用厚重油彩化妆效果不佳的问题，开始在好莱坞后台化妆师圈里风靡，令欧菲姿成为闻名遐迩的“妆前世家”。后创作了别具一格的女性白领彩妆，在纽约开设第一家office lady makeup专业彩妆自主体验店，广受职业女性青睐。"
         android:textColor="#ffffffff"
-        android:textSize="5sp"
+        android:textSize="6.5sp"
         android:lineSpacingExtra="1dp"
         />
 </LinearLayout>

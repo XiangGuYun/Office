@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="上妆视频"
             android:textColor="#ffffffff"
-            android:textSize="5sp"
+            android:textSize="6.5sp"
             />
         <TextView
             android:id="@+id/tvBtm"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:text="*文案*"
             android:textColor="#ffffffff"
-            android:textSize="5sp"
+            android:textSize="6.5sp"
             android:layout_marginBottom="5dp"
             />
     </LinearLayout>

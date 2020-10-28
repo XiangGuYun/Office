@@ -18,7 +18,7 @@
         android:gravity="center_horizontal"
         android:text="明星挚爱红毯唇膏\n盛世美唇惊艳全场"
         android:textColor="#ffffffff"
-        android:textSize="6sp"
+        android:textSize="7sp"
         />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_marginTop="6dp"
         android:text="欧菲姿OFFICE红毯丝绒唇膏 3.2g"
         android:textColor="#ffffffff"
-        android:textSize="5sp"
+        android:textSize="6.5sp"
         />
 
     <TextView
