@@ -29,8 +29,9 @@ class SearchResultActivity : OfficeBaseActivity(), RVInterface, BmpUtils {
         ivSearch.hide()
 
         Req.getShangPinFenYeLieBiao(name = extraStr("search")) {
-            val productList = it.data
 
+            val productList = it.data
+            if(productList == null) return@getShangPinFenYeLieBiao
             Req.searchZhuangRong(name = extraStr("search")) {
                 val zrList = it.data
 

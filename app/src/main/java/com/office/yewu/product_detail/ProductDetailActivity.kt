@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.header.*
 @LayoutId(R.layout.activity_product_detail)
 class ProductDetailActivity : OfficeBaseActivity() {
     override fun init(bundle: Bundle?) {
-
         ivSearch.hide()
 
         when(extraStr("type")){

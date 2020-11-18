@@ -19,23 +19,23 @@ import com.yp.baselib.utils.BusUtils
 import com.yp.baselib.utils.fragment.old.FragmentUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
-import kotlinx.android.synthetic.main.fragment_zr_detail.*
+import kotlinx.android.synthetic.main.fragment_zr_detail_new.*
 
 /**
  * 妆容详情
  */
-@LayoutId(R.layout.fragment_zr_detail)
-class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextViewUtils {
+@LayoutId(R.layout.fragment_zr_detail_new)
+class NewZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextViewUtils {
 
-    private var fu: FragmentUtils<ProductGalleryFragment>? = null
     private lateinit var arr: List<String>
+//    private lateinit var fu: FragmentUtils<NewProductGalleryFragment>
 
     companion object {
         fun newInstance(
             id: Int,
             isAttachDetailActivity: Boolean = false
-        ): ZhuangRongDetailFragment {
-            return ZhuangRongDetailFragment().apply {
+        ): NewZhuangRongDetailFragment {
+            return NewZhuangRongDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)
                     putBoolean("isAttachDetailActivity", isAttachDetailActivity)
@@ -48,8 +48,8 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextView
 
         val id = arguments!!.getInt("id")
 
-        flContainerPD1.post {
-            flContainerPD1.doLP<LLLP> {
+        flContainerPDNew.post {
+            flContainerPDNew.doLP<LLLP> {
                 it.width = getAct().srnWidth - 140.dp - 20.dp
                 it.height = getAct().srnWidth - 140.dp - 20.dp
             }
@@ -64,11 +64,14 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextView
                 arr = listOf(it.data.img)
             }
 
+
             arr.forEach {
-                Log.d("gsdgsdgjryjth", "----"+it)
+                Log.d("dasdasdas", it)
             }
 
-            fu = FragmentUtils(
+//            "---------------${arr.size}".toast()
+
+            FragmentUtils(
                 getAct(),
                 ProductGalleryFragment.newInstance(
                     appendStr(ArrayList(arr), ","){
@@ -77,7 +80,7 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextView
                     arguments!!.getBoolean("isAttachDetailActivity")
                 )
                 ,
-                R.id.flContainerPD1
+                R.id.flContainerPDNew
             )
 
             Req.getLinkProducts(it.data.id) {
@@ -168,9 +171,4 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextView
             }
         }
     }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
-
 }

@@ -1,16 +1,17 @@
 package com.office.yewu
 
 import android.os.Bundle
+import android.util.Log
 import com.office.bean.ZhuangRongFenLeiShu
 import com.office.net.Req
 import com.office.yewu.products.ProductsActivity
-import com.yp.baselib.BaseActivity
+import com.tencent.bugly.crashreport.CrashReport
 import com.yp.baselib.LayoutId
 import com.yp.baselib.StatusBarColor
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.header.*
+
 
 /**
  * 主页
@@ -31,10 +32,15 @@ class MainActivity : OfficeBaseActivity(), RVInterface {
 
     override fun init(bundle: Bundle?) {
 
+//        if("2020-12-01".reverseFmtDate("yyyy-MM-dd") < System.currentTimeMillis()){
+//            finish()
+//        }
+
         // 场景妆容区域的六个按钮，其显示与否根据后端动态返回决定
 //        val btnZrList = listOf(btnCJZR1, btnCJZR2, btnCJZR3, btnCJZR4, btnCJZR5, btnCJZR6)
 
-
+        val DM = resources.displayMetrics
+        Log.e("手机dpi====", DM.widthPixels.toString()+" "+DM.heightPixels+" "+DM.densityDpi.toString() + "")
 
         Req.getZhuangRongFenLeiShu("0") { it ->
             it.data.forEach {
@@ -63,8 +69,9 @@ class MainActivity : OfficeBaseActivity(), RVInterface {
                 { h, p ->
                     h.tv(R.id.tv).txt(listZR[p].name).bg(zrBgList[p])
                     h.itemClick {
-                        goTo<ProductsActivity>("type" to "MakeUp", "index" to p+9, "listZR" to listZR
-                            )
+                        goTo<ProductsActivity>(
+                            "type" to "MakeUp", "index" to p + 9, "listZR" to listZR
+                        )
                     }
                 }, {
                     0
@@ -108,35 +115,35 @@ class MainActivity : OfficeBaseActivity(), RVInterface {
         btnChunZhuang.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 8)
         }
-        btnXieZhuang.click {
+//        btnXieZhuang.click {
+//            goTo<ProductsActivity>("type" to "Products", "index" to 8)
+//        }
+        btnHuFuXiLie.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 9)
         }
-        btnHuFuXiLie.click {
+        btnMianBuQingJie.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 10)
         }
-        btnMianBuQingJie.click {
+        btnMianBuHuLi.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 11)
         }
-        btnMianBuHuLi.click {
+        btnYanBuHuLi.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 12)
         }
-        btnYanBuHuLi.click {
+        btnChunBuHuLi.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 13)
         }
-        btnChunBuHuLi.click {
+        btnGongJuXiLie.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 14)
         }
-        btnGongJuXiLie.click {
+        btnShuaJu.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 15)
         }
-        btnShuaJu.click {
+        btnYiQi.click {
             goTo<ProductsActivity>("type" to "Products", "index" to 16)
         }
-        btnYiQi.click {
-            goTo<ProductsActivity>("type" to "Products", "index" to 17)
-        }
         btnFuZhu.click {
-            goTo<ProductsActivity>("type" to "Products", "index" to 18)
+            goTo<ProductsActivity>("type" to "Products", "index" to 17)
         }
 
         /*

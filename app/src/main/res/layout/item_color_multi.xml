@@ -2,12 +2,12 @@
 <FrameLayout
     android:id="@+id/parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="20dp"
-    android:layout_height="17.5dp">
+    android:layout_width="25dp"
+    android:layout_height="22.5dp">
     <ImageView
         android:id="@+id/ivColor"
-        android:layout_width="15dp"
-        android:layout_height="15dp" />
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
     <View
         android:id="@+id/mask"
         android:layout_width="match_parent"

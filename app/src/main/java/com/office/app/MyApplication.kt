@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
+import com.tencent.bugly.crashreport.CrashReport
 import com.yp.baselib.net.HttpsHelp
 import com.zhy.http.okhttp.OkHttpUtils
 import me.yokeyword.fragmentation.BuildConfig
@@ -37,6 +38,8 @@ class MyApplication : Application() {
         _context = applicationContext
         initOKHttp()
         HttpsHelp.handleSSLHandshake()
+
+        CrashReport.initCrashReport(applicationContext, "2cf269fc25", false);
 //        initFragmentation()
     }
 

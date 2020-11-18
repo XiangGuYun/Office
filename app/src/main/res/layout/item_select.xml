@@ -6,8 +6,8 @@
     android:paddingBottom="4dp">
     <TextView
         android:id="@+id/tv"
-        android:layout_width="69dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="新品上市 # NEW IN "
         android:textColor="#FFFFFF"
         android:textSize="9sp"

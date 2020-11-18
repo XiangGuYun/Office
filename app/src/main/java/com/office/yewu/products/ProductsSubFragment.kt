@@ -29,7 +29,7 @@ class ProductsSubFragment : BaseFragment(), RVInterface {
         rvDetail.wrap.gridManager(2).rvMultiAdapter(list, {
             holder, pos ->
             holder.iv(R.id.ivProduct).doLP<LinearLayout.LayoutParams> {
-                val size = (getAct().srnWidth- 100.dp -30.dp - 2.5.dp)/2
+                val size = (getAct().srnWidth- 140.dp -30.dp - 2.5.dp)/2
                 it.width = size
                 it.height = size
             }

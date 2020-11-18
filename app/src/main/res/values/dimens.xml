@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="products_list">140dp</dimen>
+    <dimen name="origin_7sp">11sp</dimen>
+    <dimen name="origin_4sp">9sp</dimen>
+    <dimen name="origin_6_5sp">9sp</dimen>
+</resources>

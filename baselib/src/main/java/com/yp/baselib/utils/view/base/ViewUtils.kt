@@ -704,7 +704,7 @@ interface ViewUtils {
     }
 
     fun ViewPager.setViewAdapter(count:Int, getPageView:(pos:Int)->View){
-        val pagerAdapter: PagerAdapter = object : PagerAdapter() {
+        val pagerAdapter = object : PagerAdapter() {
             override fun getCount(): Int {
                 return count
             }

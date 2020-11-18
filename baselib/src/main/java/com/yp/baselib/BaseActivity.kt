@@ -3,6 +3,7 @@ package com.yp.baselib
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Resources
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +15,6 @@ import android.view.View
 import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import android.view.WindowManager
-import android.widget.ImageView
 import android.widget.Toast
 import com.githang.statusbar.StatusBarCompat
 import com.google.gson.Gson
@@ -45,11 +45,14 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
     var topBarId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        beforeOnCreate()
         super.onCreate(savedInstanceState)
+
+        Log.d(ACTIVITY_NAME, javaClass.simpleName)
+
         supportActionBar?.hide()
         //初始化注解
         initAnnotation()
-
         //设置屏幕方向
         if (!dont_reqest_orientation) {
             try{
@@ -62,7 +65,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
                     else
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 }
-            }catch (e:IllegalStateException){
+            }catch (e: IllegalStateException){
 
             }
         }
@@ -92,25 +95,26 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
         val annotations = this::class.annotations
         annotations.forEachIndexed { _, it->
             when(it.annotationClass){
-                LayoutId::class->{
+                LayoutId::class -> {
                     viewInject = it as LayoutId
                 }
-                StatusBarColor::class->{
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) colorInject = it as StatusBarColor
+                StatusBarColor::class -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) colorInject =
+                        it as StatusBarColor
                 }
-                Orientation::class->{
+                Orientation::class -> {
                     orientationInject = it as Orientation
                 }
-                Bus::class->{
+                Bus::class -> {
                     startEventBus = true
                 }
-                StatusBarBlackText::class->{
+                StatusBarBlackText::class -> {
                     setStatusBarTextBlack(true)
                 }
-                FullScreen::class->{
+                FullScreen::class -> {
                     fullscreen(true)
                 }
-                NotFitSystemWindow::class->{
+                NotFitSystemWindow::class -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) notFitSystemWindow = true
                 }
                 NoReqOrientation::class -> {
@@ -124,6 +128,8 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
         }
     }
 
+    protected open fun beforeOnCreate(){}
+
     protected open fun beforeInit() {}
 
     override fun onResume() {
@@ -132,7 +138,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
     }
 
     override fun onDestroy() {
-        Log.d("ActivityName", "移除了 "+javaClass.simpleName)
+        Log.d("ActivityName", "移除了 " + javaClass.simpleName)
         actList.remove(this)
         if(startEventBus){
             EventBus.getDefault().unregister(this)
@@ -150,7 +156,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
         /**
          * 判断在Activity栈中是否包含某个Activity，传入简名即可
          */
-        fun containActivity(simpleName:String) : Boolean{
+        fun containActivity(simpleName: String) : Boolean{
             return actList.find { it.javaClass.simpleName == simpleName } != null
         }
 
@@ -158,7 +164,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
          * 根据Activity的SimpleName来关闭它
          * @param actName String
          */
-        fun finishActivityByName(actName:String){
+        fun finishActivityByName(actName: String){
             for(activity in actList){
                 if(activity.javaClass.simpleName==actName){
                     activity.finish()
@@ -183,7 +189,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
          * 关闭所有的Activity
          */
         fun finishAllActivities(){
-            Log.d("ActivityName", "size is "+actList.size)
+            Log.d("ActivityName", "size is " + actList.size)
             for(activity in actList){
                 Log.d("ActivityName", activity.javaClass.simpleName)
                 activity.finish()
@@ -212,7 +218,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
         /**
          * 根据类名来在栈中查找Activity，可能为空，可替代EventBus来直接调用要查找的Activity的方法
          */
-        fun <T:BaseActivity> findActivity(simpleName:String): T? {
+        fun <T : BaseActivity> findActivity(simpleName: String): T? {
             return actList.find { it.javaClass.simpleName == simpleName } as T
         }
 
@@ -222,7 +228,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
      * 设置状态栏颜色为黑色，仅对6.0以上版本有效
      * @param isDark Boolean
      */
-    fun setStatusBarTextBlack(isDark:Boolean) {
+    fun setStatusBarTextBlack(isDark: Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             val decor = window.decorView
             if(isDark){
@@ -262,9 +268,11 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
     /**
      * 方便在Activity中弹出Toast
      */
-    fun Any.toast(isLong: Boolean=false){
-        Toast.makeText(this@BaseActivity, "$this",
-            if(!isLong)Toast.LENGTH_SHORT else Toast.LENGTH_LONG).apply {
+    fun Any.toast(isLong: Boolean = false){
+        Toast.makeText(
+            this@BaseActivity, "$this",
+            if (!isLong) Toast.LENGTH_SHORT else Toast.LENGTH_LONG
+        ).apply {
             setGravity(Gravity.CENTER, 0, 0)
         }.show()
     }
@@ -294,7 +302,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
      * 设置窗口变灰
      * @param alpha Float
      */
-    fun setWindowAlpha(alpha:Float=0.4f){
+    fun setWindowAlpha(alpha: Float = 0.4f){
         val attr = window.attributes
         attr.alpha = alpha
         window.attributes = attr
@@ -305,38 +313,44 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
      * @param jsonStr String
      * @return List<T>
      */
-    fun <T> strToJsonList(jsonStr:String): List<T> {
-        return gson.fromJson(jsonStr, object : TypeToken<List<T>>(){}.type) as List<T>
+    fun <T> strToJsonList(jsonStr: String): List<T> {
+        return gson.fromJson(jsonStr, object : TypeToken<List<T>>() {}.type) as List<T>
     }
 
     /**
      * 启动Activity
      */
     inline fun <reified T : Activity> goTo() {
-        startActivity( Intent(this, T::class.java))
+        startActivity(Intent(this, T::class.java))
     }
 
     /**
      * 启动Activity，可带参数和跳转动画
      */
-    inline fun <reified T: Activity> goTo(vararg pairs:Pair<String,Any>, anims:Pair<Int, Int> = 0 to 0){
+    inline fun <reified T : Activity> goTo(
+        vararg pairs: Pair<String, Any>,
+        anims: Pair<Int, Int> = 0 to 0
+    ){
         val intent = Intent(this, T::class.java)
         pairs.forEach {
             when(it.second){
                 is String -> {
-                    intent.putExtra(it.first,it.second.toString())
+                    intent.putExtra(it.first, it.second.toString())
                 }
                 is Int -> {
-                    intent.putExtra(it.first,it.second as Int)
+                    intent.putExtra(it.first, it.second as Int)
                 }
                 is Boolean -> {
-                    intent.putExtra(it.first,it.second as Boolean)
+                    intent.putExtra(it.first, it.second as Boolean)
                 }
                 is Double -> {
-                    intent.putExtra(it.first,it.second as Double)
+                    intent.putExtra(it.first, it.second as Double)
                 }
-                is java.io.Serializable -> intent.putExtra(it.first,it.second as java.io.Serializable)
-                is Parcelable -> intent.putExtra(it.first,it.second as Parcelable)
+                is java.io.Serializable -> intent.putExtra(
+                    it.first,
+                    it.second as java.io.Serializable
+                )
+                is Parcelable -> intent.putExtra(it.first, it.second as Parcelable)
             }
             Log.d("T_BUNDLE", ("${it.first} ${it.second}"))
         }
@@ -365,7 +379,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
     /**
      * 设置底部导航栏是是否显示
      */
-    fun setNavigationBar(visible:Boolean){
+    fun setNavigationBar(visible: Boolean){
         if (!visible){
             window.decorView.systemUiVisibility = SYSTEM_UI_FLAG_HIDE_NAVIGATION
         } else {
@@ -373,7 +387,7 @@ abstract class BaseActivity : SupportActivity(), ViewUtils, ContextUtils, TextVi
         }
     }
 
-    fun inflate(id:Int): View {
+    fun inflate(id: Int): View {
         return LayoutInflater.from(this).inflate(id, null)
     }
 

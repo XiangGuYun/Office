@@ -26,11 +26,13 @@ data class ZhuangRongFenLeiXiangQing(
         val title: String,
         val updateTime: String,
         val videoDTOList: List<VideoDTO>,
-        val imgCover:String
+        val imgCover:String,
+        val bannerImg:String? = null
     ) {
         data class PurposeStep(
             val stepContent: String,
-            val stepName: String
+            val stepName: String?,
+            val stepImg: String
         )
 
         data class VideoDTO(

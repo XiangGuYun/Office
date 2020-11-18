@@ -9,21 +9,21 @@ import com.yp.baselib.BaseFragment
 import com.yp.baselib.LayoutId
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
-import kotlinx.android.synthetic.main.fragment_product_gallery.*
+import kotlinx.android.synthetic.main.fragment_product_gallery_new.*
 
 
 /**
  * 商品详情轮播图
  */
-@LayoutId(R.layout.fragment_product_gallery)
-class ProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
+@LayoutId(R.layout.fragment_product_gallery_new)
+class NewProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
 
     companion object {
-        fun newInstance(imgUrls: String?, isAttachDetailActivity:Boolean = false): ProductGalleryFragment {
-            return ProductGalleryFragment().apply {
+        fun newInstance(imgUrls: String?, isAttachDetailActivity:Boolean = false): NewProductGalleryFragment {
+            return NewProductGalleryFragment().apply {
                 arguments = Bundle().apply {
                     putString("imgUrls", imgUrls)
-                    Log.d("gsdgsdgjryjth", "?????"+imgUrls)
+                    Log.d("dasdasdasdasd", "?????"+imgUrls)
                     putBoolean("isAttachDetailActivity", isAttachDetailActivity)
                 }
             }
@@ -32,9 +32,6 @@ class ProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
 
     override fun init() {
         val imgUrls = arguments!!.getString("imgUrls")
-
-        imgUrls?.logD("gsdgsdgjryjth")
-
 
         val isAttachDetailActivity = arguments!!.getBoolean("isAttachDetailActivity")
 
@@ -53,9 +50,10 @@ class ProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
                 it.height = size
             }
 
+            val view = getAct().inflate(R.layout.iv_gallery_new)
+
             vpGallery.setViewAdapter(imgUrlList.size) { position: Int ->
-                val view = getAct().inflate(R.layout.iv_gallery) as ImageView
-                showBitmap(getAct(), view, imgUrlList[position])
+                showBitmap(getAct(), view.iv(R.id.ivGallery), imgUrlList[position])
                 view
             }
 

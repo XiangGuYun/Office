@@ -3,7 +3,7 @@ package com.office.bean
 data class ShangPinXiangQing(
     val checkOk: Boolean,
     val code: Int,
-    val `data`: Data,
+    val `data`: Data?,
     val enmsg: String,
     val errmsg: String,
     val msg: String,
@@ -23,14 +23,22 @@ data class ShangPinXiangQing(
         val productVideo: String,
         val titleList: String,
         val skuType: Int,
-        val videoDTOList: List<VideoDTO>
+        val videoDTOList: List<VideoDTO>,
+        val linkPurposeList: List<LinkPurpose>?
     ) {
+        data class LinkPurpose(
+            val id: Int,
+            val img: String,
+            val purposeId: String
+        )
+
         data class MallSkuDetail(
             val id: Int,
             val productImg: String,
             val productModel: String,
             val skuIcon: String
         )
+
         data class VideoDTO(
             val videoCopywriting: String,
             val videoName: String,

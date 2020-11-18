@@ -20,7 +20,7 @@
         android:text="妆容 01 推介示例"
         android:textColor="#ffffffff"
         android:layout_gravity="center_horizontal"
-        android:textSize="7sp"
+        android:textSize="@dimen/origin_7sp"
         android:layout_marginTop="12.5dp"
         />
 
@@ -30,7 +30,7 @@
         android:text="* 文案 *"
         android:textColor="#ffffffff"
         android:layout_gravity="center_horizontal"
-        android:textSize="7sp"
+        android:textSize="@dimen/origin_7sp"
         />
 
 </LinearLayout>

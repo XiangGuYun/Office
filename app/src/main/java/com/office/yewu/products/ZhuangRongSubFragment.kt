@@ -26,6 +26,9 @@ import kotlin.math.min
 class ZhuangRongSubFragment : BaseFragment(), RVInterface, BmpUtils {
 
     companion object {
+
+
+
         fun newInstance(id: Int): ZhuangRongSubFragment {
             return ZhuangRongSubFragment().apply {
                 arguments = Bundle().apply {
@@ -73,8 +76,9 @@ class ZhuangRongSubFragment : BaseFragment(), RVInterface, BmpUtils {
 
                             holder.v(R.id.flImg).post {
                                 holder.v(R.id.flImg).doLP<LLLP> {
-                                    it.width = (getAct().srnWidth - 130.dp - 30.dp - 15.dp) / 2
-                                    it.height = (getAct().srnWidth - 130.dp - 30.dp - 15.dp) / 2
+                                    it.width =
+                                        (getAct().srnWidth - 140.dp - 30.dp - 30.dp - 15.dp) / 2
+                                    it.height = (getAct().srnWidth - 140.dp -30.dp - 30.dp - 15.dp) / 2
                                 }
                                 showBitmap(getAct(), holder.iv(R.id.ivZR), list[it][pos].img)
                             }
@@ -94,22 +98,25 @@ class ZhuangRongSubFragment : BaseFragment(), RVInterface, BmpUtils {
 
                 var whiteDotIndex = 0
 
-                rvDots.wrap.managerHorizontal().rvMultiAdapter(
-                    list,
-                    { holder, pos ->
+                if(list.size > 1){
+                    rvDots.wrap.managerHorizontal().rvMultiAdapter(
+                        list,
+                        { holder, pos ->
 
-                    },
-                    {
-                        if (whiteDotIndex == it) 0 else 1
-                    }, R.layout.item_dot_white, R.layout.item_dot_dark
-                )
+                        },
+                        {
+                            if (whiteDotIndex == it) 0 else 1
+                        }, R.layout.item_dot_white, R.layout.item_dot_dark
+                    )
 
-                vp.setOnPageChangeListener(object : VpChangeListener {
-                    override fun onPageSelected(p0: Int) {
-                        whiteDotIndex = p0
-                        rvDots.update()
-                    }
-                })
+                    vp.setOnPageChangeListener(object : VpChangeListener {
+                        override fun onPageSelected(p0: Int) {
+                            whiteDotIndex = p0
+                            rvDots.update()
+                        }
+                    })
+                }
+
 
             } else {
                 // 场景妆容
@@ -135,8 +142,8 @@ class ZhuangRongSubFragment : BaseFragment(), RVInterface, BmpUtils {
 
                             holder.v(R.id.flImg).post {
                                 holder.v(R.id.flImg).doLP<LLLP> {
-                                    it.width = (getAct().srnWidth - 130.dp - 30.dp - 15.dp) / 2
-                                    it.height = (getAct().srnWidth - 130.dp - 30.dp - 15.dp) / 2
+                                    it.width = (getAct().srnWidth - 140.dp - 30.dp - 30.dp - 15.dp) / 2
+                                    it.height = (getAct().srnWidth - 140.dp -30.dp - 30.dp - 15.dp) / 2
                                 }
                                 showBitmap(getAct(), holder.iv(R.id.ivZR), list1[it][pos].img)
                             }
@@ -156,22 +163,26 @@ class ZhuangRongSubFragment : BaseFragment(), RVInterface, BmpUtils {
 
                 var whiteDotIndex = 0
 
-                rvDots.wrap.managerHorizontal().rvMultiAdapter(
-                    list1,
-                    { holder, pos ->
+                if(list1.size > 1) {
+                    rvDots.wrap.managerHorizontal().rvMultiAdapter(
+                        list1,
+                        { holder, pos ->
 
-                    },
-                    {
-                        if (whiteDotIndex == it) 0 else 1
-                    }, R.layout.item_dot_white, R.layout.item_dot_dark
-                )
+                        },
+                        {
+                            if (whiteDotIndex == it) 0 else 1
+                        }, R.layout.item_dot_white, R.layout.item_dot_dark
+                    )
 
-                vp.setOnPageChangeListener(object : VpChangeListener {
-                    override fun onPageSelected(p0: Int) {
-                        whiteDotIndex = p0
-                        rvDots.update()
-                    }
-                })
+                    vp.setOnPageChangeListener(object : VpChangeListener {
+                        override fun onPageSelected(p0: Int) {
+                            whiteDotIndex = p0
+                            rvDots.update()
+                        }
+                    })
+                }
+
+
             }
 
         }

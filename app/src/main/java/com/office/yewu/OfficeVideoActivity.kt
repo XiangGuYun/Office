@@ -1,6 +1,7 @@
 package com.office.yewu
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -23,8 +24,11 @@ class OfficeVideoActivity : BaseActivity() {
         }
     }
 
-    override fun init(bundle: Bundle?) {
+    override fun beforeOnCreate() {
+        dont_reqest_orientation = true
+    }
 
+    override fun init(bundle: Bundle?) {
         video_view.setOnPreparedListener {
             video_view.start()
         }
@@ -35,6 +39,23 @@ class OfficeVideoActivity : BaseActivity() {
             video_view.setVideoURI(Uri.parse(path))
         } else {
             video_view.setVideoPath(path)
+        }
+
+        video_view.setOnCompletionListener {
+            video_view.restart()
+        }
+
+        ivRotate.click {
+            requestedOrientation = if(resources.configuration.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            } else {
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
+        }
+
+
+        ivBack.click {
+            finish()
         }
     }
 

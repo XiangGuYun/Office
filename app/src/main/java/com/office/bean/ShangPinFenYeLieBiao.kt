@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class ShangPinFenYeLieBiao(
     val code: Int,
-    val `data`: List<Data>,
+    val `data`: List<Data>? = null,
     val enmsg: String,
     val msg: String,
     val ok: Boolean

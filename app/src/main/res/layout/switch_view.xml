@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#000000"
     android:orientation="vertical">
 
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffffff"
-            android:textSize="7sp"
+            android:textSize="@dimen/origin_7sp"
             android:paddingBottom="1.5dp"
             />
         <View
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="+"
             android:textColor="#ffffffff"
-            android:textSize="7sp"
+            android:textSize="@dimen/origin_7sp"
             android:layout_marginRight="2.5dp"
             android:layout_gravity="right|center_vertical"
             />
@@ -59,8 +59,21 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffffff"
             android:lineSpacingExtra="5dp"
-            android:textSize="6.5sp"
+            android:textSize="9sp"
             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llImg"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_height="10dp"
+        android:orientation="horizontal">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rvImg"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -14,13 +14,13 @@ class AboutFragment : BaseFragment(),BmpUtils {
     override fun init() {
         ivStory.post {
             ivStory.doLP<LLLP> {
-                it.width = getAct().srnWidth-100.dp
+                it.width = getAct().srnWidth-140.dp
                 it.height = it.width * 12 / 26
             }
         }
 
         videoView.doLP<LLLP> {
-            it.width = getAct().srnWidth-100.dp
+            it.width = getAct().srnWidth-140.dp
             it.height = it.width * 146 / 260
         }
 

@@ -5,7 +5,7 @@ import org.greenrobot.eventbus.EventBus
 
 object BusUtils {
 
-    fun post(what:Int, obj:Any?, arg1:Int= -1,  arg2:Int = -1){
+    fun post(what:Int, obj:Any? = null, arg1:Int= -1,  arg2:Int = -1){
         val msg = Message.obtain()
         msg.what = what
         if(obj != null) msg.obj = obj

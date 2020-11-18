@@ -44,5 +44,11 @@ dependencies {
 
     implementation 'com.devbrackets.android:exomedia:4.3.0'
 
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+
+    implementation ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
+        exclude module: 'support-v4'
+    }
+
 //    implementation 'com.youth.banner:banner:2.1.0'
 }

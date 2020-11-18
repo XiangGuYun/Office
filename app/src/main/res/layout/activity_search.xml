@@ -16,7 +16,7 @@
         android:layout_marginTop="25.5dp"
         android:text="搜索 # SEARCH"
         android:textColor="#ff939393"
-        android:textSize="7sp" />
+        android:textSize="@dimen/origin_7sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
         android:layout_marginTop="15dp"
         android:text="历史搜索.."
         android:textColor="#ff939393"
-        android:textSize="7sp" />
+        android:textSize="@dimen/origin_7sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSearchHistory"

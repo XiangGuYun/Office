@@ -23,9 +23,9 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="46.5dp"
-                android:layout_marginRight="6dp">
+                android:layout_marginRight="8dp">
 
                 <TextView
                     android:id="@+id/btnProducts"
@@ -37,7 +37,7 @@
                     android:paddingBottom="2.5dp"
                     android:text="PRODUCTS"
                     android:textColor="#ff000000"
-                    android:textSize="9sp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -57,7 +57,7 @@
                 android:layout_marginTop="15dp"
                 android:text="· 彩妆系列 # BEAUTY ·"
                 android:textColor="#ffffffff"
-                android:textSize="7sp" />
+                android:textSize="9dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,13 +72,13 @@
 
                 <TextView
                     android:id="@+id/btnZhuangQian"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_8d8d8d"
                     android:gravity="center"
                     android:text="妆前"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -86,13 +86,13 @@
 
                 <TextView
                     android:id="@+id/btnDiZhuang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_ffdeca"
                     android:gravity="center"
                     android:text="底妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -100,13 +100,13 @@
 
                 <TextView
                     android:id="@+id/btnDingZhuang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_fdcfaf"
                     android:gravity="center"
                     android:text="定妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -114,13 +114,13 @@
 
                 <TextView
                     android:id="@+id/btnJiaZhuang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_dfa98a"
                     android:gravity="center"
                     android:text="颊妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -128,13 +128,13 @@
 
                 <TextView
                     android:id="@+id/btnMeiZhuang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_9e7777"
                     android:gravity="center"
                     android:text="眉妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -142,13 +142,13 @@
 
                 <TextView
                     android:id="@+id/btnYanZhuang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_ff7f29"
                     android:gravity="center"
                     android:text="眼妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -156,27 +156,29 @@
 
                 <TextView
                     android:id="@+id/btnChunZhuang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_ce0000"
                     android:gravity="center"
                     android:text="唇妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
+                    android:visibility="gone"
                     android:layout_width="10dp"
                     android:layout_height="1dp" />
 
                 <TextView
                     android:id="@+id/btnXieZhuang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_ffffff"
                     android:gravity="center"
                     android:text="卸妆"
+                    android:visibility="gone"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="1dp"
@@ -192,7 +194,7 @@
                 android:layout_marginTop="17.5dp"
                 android:text="· 护肤系列 # COSMETIC ·"
                 android:textColor="#ffffffff"
-                android:textSize="7sp" />
+                android:textSize="9dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -207,13 +209,13 @@
 
                 <TextView
                     android:id="@+id/btnMianBuQingJie"
-                    android:layout_width="50dp"
-                    android:layout_height="11.5dp"
+                    android:layout_width="90dp"
+                    android:layout_height="13.5dp"
                     android:background="@drawable/bg_rect_c4fffe"
                     android:gravity="center"
-                    android:text="面部清洁"
+                    android:text="面部清洁系列"
                     android:textColor="#000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -221,13 +223,13 @@
 
                 <TextView
                     android:id="@+id/btnMianBuHuLi"
-                    android:layout_width="50dp"
-                    android:layout_height="11.5dp"
+                    android:layout_width="90dp"
+                    android:layout_height="13.5dp"
                     android:background="@drawable/bg_rect_fdcdaf"
                     android:gravity="center"
-                    android:text="面部护理"
+                    android:text="至臻舒缓修护系列"
                     android:textColor="#000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -235,13 +237,13 @@
 
                 <TextView
                     android:id="@+id/btnYanBuHuLi"
-                    android:layout_width="50dp"
-                    android:layout_height="11.5dp"
+                    android:layout_width="90dp"
+                    android:layout_height="13.5dp"
                     android:background="@drawable/bg_rect_ffb7f7"
                     android:gravity="center"
-                    android:text="眼部护理"
+                    android:text="卓妍凝润保湿系列"
                     android:textColor="#000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -249,13 +251,13 @@
 
                 <TextView
                     android:id="@+id/btnChunBuHuLi"
-                    android:layout_width="50dp"
-                    android:layout_height="11.5dp"
+                    android:layout_width="90dp"
+                    android:layout_height="13.5dp"
                     android:background="@drawable/bg_rect_ff4444"
                     android:gravity="center"
-                    android:text="唇部护理"
+                    android:text="奢弹多肽系列"
                     android:textColor="#000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="0dp"
@@ -271,7 +273,7 @@
                 android:layout_marginTop="17.5dp"
                 android:text="· 工具系列 # TOOLS ·"
                 android:textColor="#ffffffff"
-                android:textSize="7sp" />
+                android:textSize="9dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -286,13 +288,13 @@
 
                 <TextView
                     android:id="@+id/btnShuaJu"
-                    android:layout_width="35.5dp"
-                    android:layout_height="11.5dp"
+                    android:layout_width="55dp"
+                    android:layout_height="13.5dp"
                     android:background="@drawable/bg_rect_stroke"
                     android:gravity="center"
                     android:text="刷具"
                     android:textColor="#ffffff"
-                    android:textSize="6dp" />
+                    android:textSize="8dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -300,13 +302,13 @@
 
                 <TextView
                     android:id="@+id/btnYiQi"
-                    android:layout_width="35.5dp"
-                    android:layout_height="11.5dp"
+                    android:layout_width="55dp"
+                    android:layout_height="13.5dp"
                     android:background="@drawable/bg_rect_stroke"
                     android:gravity="center"
                     android:text="仪器"
                     android:textColor="#ffffff"
-                    android:textSize="6dp" />
+                    android:textSize="8dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -314,13 +316,13 @@
 
                 <TextView
                     android:id="@+id/btnFuZhu"
-                    android:layout_width="35.5dp"
-                    android:layout_height="11.5dp"
+                    android:layout_width="55dp"
+                    android:layout_height="13.5dp"
                     android:background="@drawable/bg_rect_stroke"
                     android:gravity="center"
                     android:text="辅助"
                     android:textColor="#ffffff"
-                    android:textSize="6dp" />
+                    android:textSize="8dp" />
 
                 <View
                     android:layout_width="0dp"
@@ -331,9 +333,9 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="46.5dp"
-                android:layout_marginRight="6dp">
+                android:layout_marginRight="8dp">
 
                 <TextView
                     android:id="@+id/btnMakeUp"
@@ -345,7 +347,7 @@
                     android:paddingBottom="2.5dp"
                     android:text="MAKEUP"
                     android:textColor="#ff000000"
-                    android:textSize="9sp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -364,7 +366,7 @@
                 android:layout_marginTop="15dp"
                 android:text="· 局部妆容 # FEATURE ·"
                 android:textColor="#ffffffff"
-                android:textSize="7sp" />
+                android:textSize="9dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -379,13 +381,13 @@
 
                 <TextView
                     android:id="@+id/btnDiZhuangJB"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_ffdeca"
                     android:gravity="center"
                     android:text="底妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -393,13 +395,13 @@
 
                 <TextView
                     android:id="@+id/btnJiaZhuangJB"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_dfa98a"
                     android:gravity="center"
                     android:text="颊妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -407,13 +409,13 @@
 
                 <TextView
                     android:id="@+id/btnMeiZhuangJB"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_9e7777"
                     android:gravity="center"
                     android:text="眉妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -421,13 +423,13 @@
 
                 <TextView
                     android:id="@+id/btnYanZhuangJB"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_ff7f29"
                     android:gravity="center"
                     android:text="眼妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -435,13 +437,13 @@
 
                 <TextView
                     android:id="@+id/btnChunZhuangJB"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/bg_circle_ce0000"
                     android:gravity="center"
                     android:text="唇妆"
                     android:textColor="#ff000000"
-                    android:textSize="7sp" />
+                    android:textSize="9dp" />
 
                 <View
                     android:layout_width="0dp"
@@ -451,16 +453,15 @@
 
             <TextView
                 android:id="@+id/btnCJZR"
-                android:layout_width="79dp"
-                android:layout_height="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="17.5dp"
                 android:text="· 场景妆容 # SCENE ·"
                 android:textColor="#ffffffff"
-                android:textSize="7sp" />
+                android:textSize="9dp" />
 
             <android.support.v7.widget.RecyclerView
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -479,13 +480,13 @@
 
 <!--                <TextView-->
 <!--                    android:id="@+id/btnCJZR1"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="11.5dp"-->
+<!--                    android:layout_width="55dp"-->
+<!--                    android:layout_height="13.5dp"-->
 <!--                    android:background="@drawable/bg_rect_shcz"-->
 <!--                    android:gravity="center"-->
 <!--                    android:text="生活彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="7sp"-->
+<!--                    android:textSize="9dp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--                <View-->
@@ -494,13 +495,13 @@
 
 <!--                <TextView-->
 <!--                    android:id="@+id/btnCJZR2"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="11.5dp"-->
+<!--                    android:layout_width="55dp"-->
+<!--                    android:layout_height="13.5dp"-->
 <!--                    android:background="@drawable/bg_rect_ffffff"-->
 <!--                    android:gravity="center"-->
 <!--                    android:text="职场彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="7sp"-->
+<!--                    android:textSize="9dp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--                <View-->
@@ -509,13 +510,13 @@
 
 <!--                <TextView-->
 <!--                    android:id="@+id/btnCJZR3"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="11.5dp"-->
+<!--                    android:layout_width="55dp"-->
+<!--                    android:layout_height="13.5dp"-->
 <!--                    android:background="@drawable/bg_rect_yhcz"-->
 <!--                    android:gravity="center"-->
 <!--                    android:text="约会彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="7sp"-->
+<!--                    android:textSize="9dp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--                <View-->
@@ -524,13 +525,13 @@
 
 <!--                <TextView-->
 <!--                    android:id="@+id/btnCJZR4"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="11.5dp"-->
+<!--                    android:layout_width="55dp"-->
+<!--                    android:layout_height="13.5dp"-->
 <!--                    android:background="@drawable/bg_rect_sscz"-->
 <!--                    android:gravity="center"-->
 <!--                    android:text="时尚彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="7sp"-->
+<!--                    android:textSize="9dp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--                <View-->
@@ -539,13 +540,13 @@
 
 <!--                <TextView-->
 <!--                    android:id="@+id/btnCJZR5"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="11.5dp"-->
+<!--                    android:layout_width="55dp"-->
+<!--                    android:layout_height="13.5dp"-->
 <!--                    android:background="@drawable/bg_rect_qscz"-->
 <!--                    android:gravity="center"-->
 <!--                    android:text="趋势彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="7sp"-->
+<!--                    android:textSize="9dp"-->
 <!--                    android:visibility="invisible" />-->
 
 <!--&lt;!&ndash;                <View&ndash;&gt;-->
@@ -566,13 +567,13 @@
 
 <!--                <TextView-->
 <!--                    android:id="@+id/btnCJZR6"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="11.5dp"-->
+<!--                    android:layout_width="55dp"-->
+<!--                    android:layout_height="13.5dp"-->
 <!--                    android:background="@drawable/bg_rect_qscz"-->
 <!--                    android:gravity="center"-->
 <!--                    android:text="趋势彩妆"-->
 <!--                    android:textColor="#000000"-->
-<!--                    android:textSize="7sp"-->
+<!--                    android:textSize="9dp"-->
 <!--                    android:visibility="gone" />-->
 
 <!--                <View-->
@@ -586,9 +587,9 @@
                 android:id="@+id/flAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginTop="46.5dp"
-                android:layout_marginRight="6dp">
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="8dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -599,7 +600,7 @@
                     android:paddingBottom="2.5dp"
                     android:text="ABOUT"
                     android:textColor="#ff000000"
-                    android:textSize="9sp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -613,12 +614,12 @@
         </LinearLayout>
     </LinearLayout>
     <TextView
-        android:layout_width="49dp"
-        android:layout_height="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="WWW.OLCOLOR.COM"
         android:textColor="#ffffffff"
-        android:textSize="4sp"
+        android:textSize="@dimen/origin_4sp"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         />
 </FrameLayout>

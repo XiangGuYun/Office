@@ -34,7 +34,7 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
         val id = arguments!!.getInt("id")
 
         Req.getShangPinFenYeLieBiao(categoryId = if(id==-1) OK.OPTIONAL else id.toString()) {
-
+            if(it.data == null) return@getShangPinFenYeLieBiao
             val itemSize = it.data.size
             val pageSize = (itemSize + 3) / 4
 
@@ -52,14 +52,16 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
                     showBitmap(act(), holder.iv(R.id.ivProduct), list[it][pos].imgCover)
                     holder.apply {
                         iv(R.id.ivProduct).doLP<LLLP> {
-                            val size = (getAct().srnWidth - 100.dp - 30.dp - 2.5.dp) / 2
-                            it.width = size
-                            it.height = size
+                            val size = (getAct().srnWidth - 140.dp - 30.dp - 2.5.dp) / 2
+                            it.width = size-10.dp
+                            it.height = size-10.dp
                         }
-                        tv(R.id.tvDesc).text = list[it][pos].name
+                        tv(R.id.tvDesc).text = list[it][pos].titleList
                         itemClick { _ ->
                             BusUtils.post(MsgWhat.SWITCH_TO_DETAIL_PAGE, list[it][pos].id)
                         }
+                        tv(R.id.tvName).text = list[it][pos].name
+                        tv(R.id.tvEnName).text = list[it][pos].enName
                     }
                 }, {
                     0
@@ -71,22 +73,25 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
 
         var whiteDotIndex = 0
 
-        rvDots.wrap.managerHorizontal().rvMultiAdapter(
-            list,
-            { holder, pos ->
+        if(list.size > 1){
+            rvDots.wrap.managerHorizontal().rvMultiAdapter(
+                list,
+                { holder, pos ->
 
-            },
-            {
-                if (whiteDotIndex == it) 0 else 1
-            }, R.layout.item_dot_white, R.layout.item_dot_dark
-        )
+                },
+                {
+                    if (whiteDotIndex == it) 0 else 1
+                }, R.layout.item_dot_white, R.layout.item_dot_dark
+            )
 
-        vpDetail.setOnPageChangeListener(object : VpChangeListener {
-            override fun onPageSelected(p0: Int) {
-                whiteDotIndex = p0
-                rvDots.update()
-            }
-        })
+            vpDetail.setOnPageChangeListener(object : VpChangeListener {
+                override fun onPageSelected(p0: Int) {
+                    whiteDotIndex = p0
+                    rvDots.update()
+                }
+            })
+        }
+
 
     }
 

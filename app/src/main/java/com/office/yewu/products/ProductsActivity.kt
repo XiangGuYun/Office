@@ -3,6 +3,7 @@ package com.office.yewu.products
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Message
+import android.view.View
 import com.office.bean.ZhuangRongFenLeiShu
 import com.office.constant.Id
 import com.office.constant.MsgWhat
@@ -13,6 +14,8 @@ import com.yp.baselib.utils.fragment.old.FragmentUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
 import com.office.yewu.product_detail.CzProductDetailFragment
+import com.office.yewu.product_detail.NewZhuangRongDetailFragment
+import com.office.yewu.product_detail.ProductDetailFragment
 import com.office.yewu.product_detail.ZhuangRongDetailFragment
 import com.yp.baselib.*
 import kotlinx.android.synthetic.main.activity_products.*
@@ -27,10 +30,14 @@ import org.greenrobot.eventbus.Subscribe
 @LayoutId(R.layout.activity_products)
 class ProductsActivity : OfficeBaseActivity(), RVInterface {
 
+    private var selectedIndex: Int = 0
     private lateinit var productsDetailFragment: CzProductDetailFragment
     private lateinit var zrDetailFragment: ZhuangRongDetailFragment
-    private lateinit var fu: FragmentUtils<BaseFragment>
+    private lateinit var zrDetailFragmentNew: NewZhuangRongDetailFragment
+    lateinit var fu: FragmentUtils<BaseFragment>
     var isDetailPage = false
+    var isDetailFragmentShowing = false
+    var isZrDetailFragmentNewInFront = false
 
     /**
      * 右侧详情Fragment是否处于显示状态
@@ -50,30 +57,61 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
             MsgWhat.SWITCH_TO_DETAIL_PAGE -> {
                 // 根据传过来的产品ID来切换到对应的产品详情页
                 showRightDetailFragment = true
-                if (type == "Products" || isDetailPage) {
-                    productsDetailFragment =
-                        CzProductDetailFragment.newInstance(msg.obj.toString().toInt())
-                    fu.switchFragmentWithStack(productsDetailFragment)
-                } else {
-                    zrDetailFragment =
-                        ZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
-                    fu.switchFragmentWithStack(zrDetailFragment)
+                when {
+                    msg.arg2 == 6 -> {
+                        zrDetailFragmentNew =
+                            NewZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
+                        fu.switchFragmentWithStack(zrDetailFragmentNew)
+                        isZrDetailFragmentNewInFront = true
+                    }
+                    type == "Products" || isDetailPage -> {
+                        productsDetailFragment =
+                            CzProductDetailFragment.newInstance(msg.obj.toString().toInt())
+                        fu.switchFragmentWithStack(productsDetailFragment)
+                    }
+                    else -> {
+                        zrDetailFragment =
+                            ZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
+                        fu.switchFragmentWithStack(zrDetailFragment)
+                    }
                 }
+            }
+            0x1234 ->{
+                productsDetailFragment = CzProductDetailFragment.newInstance(
+                    msg.arg1, true)
+                fu.switchFragmentWithStack(productsDetailFragment)
+                isDetailFragmentShowing = true
+            }
+            0x1235 ->{
+                zrDetailFragment =
+                    ZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
+                fu.switchFragmentWithStack(zrDetailFragment)
             }
         }
     }
 
     override fun onBackPressedSupport() {
-        if (showRightDetailFragment) {
-            showRightDetailFragment = false
-            if (type == "Products" || isDetailPage) {
-                productsDetailFragment.pop()
-            } else {
-                zrDetailFragment.pop()
-            }
-        } else {
-            super.onBackPressedSupport()
+        if(isZrDetailFragmentNewInFront){
+            zrDetailFragmentNew.pop()
+            isZrDetailFragmentNewInFront = false
+            return
         }
+        if(isDetailFragmentShowing){
+            isDetailFragmentShowing = false
+            productsDetailFragment.pop()
+        } else {
+            if (showRightDetailFragment) {
+                showRightDetailFragment = false
+                if (type == "Products" || isDetailPage) {
+                    productsDetailFragment.pop()
+                } else {
+                    zrDetailFragment.pop()
+                }
+            } else {
+                super.onBackPressedSupport()
+            }
+        }
+
     }
 
     lateinit var type: String
@@ -84,13 +122,28 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
             goTo<StandbyActivity>()
         }
 
+        findViewById<View>(R.id.ivBack)?.click {
+            if (showRightDetailFragment) {
+                showRightDetailFragment = false
+                if (type == "Products" || isDetailPage) {
+                    productsDetailFragment.pop()
+                } else {
+                    zrDetailFragment.pop()
+                }
+                fu.switch(selectedIndex)
+            } else {
+                super.onBackPressedSupport()
+            }
+        }
+
+
         // 获取到显示类型，需要根据显示类型来决定左侧区域显示哪些标签
         type = extraStr("type")
         when (type) {
             "Products" -> {
                 listShowTag = arrayListOf(
-                    "新品上市 # NEW IN" to Id.XIN_PIN_SHANG_SHI,
-                    "彩妆系列 # BEAUTY ←" to Id.CAI_ZHUANG_XI_LIE,
+                    "新品上市 #" to Id.XIN_PIN_SHANG_SHI,
+                    "彩妆系列 #" to Id.CAI_ZHUANG_XI_LIE,
                     " · 妆前" to Id.ZHUANG_QIAN,
                     " · 底妆" to Id.DI_ZHUANG,
                     " · 定妆" to Id.DING_ZHUANG,
@@ -98,13 +151,13 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
                     " · 眉妆" to Id.MEI_ZHUANG,
                     " · 眼妆" to Id.YAN_ZHUANG,
                     " · 唇妆" to Id.CHUN_ZHUANG,
-                    " · 卸妆" to Id.XIE_ZHUANG,
-                    "护肤系列 # COSMETIC" to Id.HU_FU_XI_LIE,
-                    " · 面部清洁" to Id.MIAN_BU_QING_JIE,
-                    " · 面部护理" to Id.MIAN_BU_HU_LI,
-                    " · 眼部护理" to Id.YAN_BU_HU_LI,
-                    " · 唇部护理" to Id.CHUN_BU_HU_LI,
-                    "工具系列 # TOOLS" to Id.GONG_JU_XI_LIE,
+//                    " · 卸妆" to Id.XIE_ZHUANG,
+                    "护肤系列 #" to Id.HU_FU_XI_LIE,
+                    " · 面部清洁系列" to Id.MIAN_BU_QING_JIE,
+                    " · 至臻舒缓修护系列" to Id.MIAN_BU_HU_LI,
+                    " · 卓妍凝润保湿系列" to Id.YAN_BU_HU_LI,
+                    " · 奢弹多肽系列" to Id.CHUN_BU_HU_LI,
+                    "工具系列 #" to Id.GONG_JU_XI_LIE,
                     " · 刷具" to Id.SHUA_JU,
                     " · 仪器" to Id.YI_QI,
                     " · 辅助" to Id.FU_ZHU
@@ -114,15 +167,15 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
                 tvTop.gone()
                 view23.show()
                 listShowTag = arrayListOf(
-                    "新品上市 # NEW IN" to Id.XIN_PIN_SHANG_SHI,
+                    "新品上市 #" to Id.XIN_PIN_SHANG_SHI,
                     "- MAKEUP" to Id.MAKE_UP,
-                    "局部妆容 # FEATURE" to Id.JU_BU_ZHUANG_RONG,
+                    "局部妆容 #" to Id.JU_BU_ZHUANG_RONG,
                     " · 底妆" to Id.DI_ZHUANG_JB,
                     " · 颊妆" to Id.JIA_ZHUANG_JB,
                     " · 眉妆" to Id.MEI_ZHUANG_JB,
                     " · 眼妆" to Id.YAN_ZHUANG_JB,
                     " · 唇妆" to Id.CHUN_ZHUANG_JB,
-                    "场景妆容 # SCENE" to Id.CHANG_JING_ZHUANG_RONG
+                    "场景妆容 #" to Id.CHANG_JING_ZHUANG_RONG
 //                    " · 生活彩妆" to if (MainActivity.zrNameList.any { it.contains("生活") }) Id.SHENG_HUO_CAI_ZHUANG else Id.NULL,
 //                    " · 职场彩妆" to if (MainActivity.zrNameList.any { it.contains("职场") }) Id.ZHI_CHANG_CAI_ZHUANG else Id.NULL,
 //                    " · 约会彩妆" to if (MainActivity.zrNameList.any { it.contains("约会") }) Id.YUE_HUI_CAI_ZHUANG else Id.NULL,
@@ -171,7 +224,7 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
         }), R.id.flContainer)
 
         // 获取到默认选中的标签项
-        var selectedIndex = extraInt("index", 0)
+        selectedIndex = extraInt("index", 0)
 
         // 构建左侧列表
         rvLeft.wrap.rvMultiAdapter(
@@ -181,10 +234,10 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
                     listShowTag[p].first.contains("MAKEUP") ||
                     listShowTag[p].first.contains("PRODUCTS")
                 ) {
-                    h.tv(R.id.tv).setFont("font/LucidaGrande.ttf").size(9f).typeface =
+                    h.tv(R.id.tv).setFont("font/LucidaGrande.ttf").size(12f).typeface =
                         Typeface.defaultFromStyle(Typeface.BOLD)
                 } else {
-                    h.tv(R.id.tv).size(8f).typeface =
+                    h.tv(R.id.tv).size(11f).typeface =
                         Typeface.defaultFromStyle(Typeface.NORMAL)
                 }
                 if(selectedIndex == p){
@@ -196,6 +249,14 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
                     if(selectedIndex == p) return@itemClick
                     selectedIndex = p
                     rvLeft.update()
+                    if(isZrDetailFragmentNewInFront){
+                        isZrDetailFragmentNewInFront = false
+                        zrDetailFragmentNew.pop()
+                    }
+                    if(isDetailFragmentShowing){
+                        isDetailFragmentShowing = false
+                        productsDetailFragment.pop()
+                    }
                     if (showRightDetailFragment) {
                         showRightDetailFragment = false
                         if (type == "Products") {
@@ -217,28 +278,3 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
     }
 
 }
-
-//        val list = listOf(
-//            "新品上市 # NEW IN", "彩妆系列 # BEAUTY ←",
-//            " · 妆前", " · 底妆", " · 定妆", " · 颊妆", " · 眉妆", " · 眼妆", " · 唇妆", " · 卸妆",
-//            "护肤系列 # COSMETIC", " · 面部清洁", " · 面部护理", " · 眼部护理", " · 唇部护理",
-//            "工具系列 # TOOLS", " · 刷具", " · 仪器", " · 辅助", "- MAKEUP", "局部妆容"," · 底妆",
-//            " · 颊妆"," · 眉妆"," · 眼妆"," · 唇妆","场景妆容 # SCENE"," · 生活彩妆"," · 职场彩妆",
-//            " · 约会彩妆"," · 时尚彩妆","· 趋势彩妆", "- ABOUT ←"
-//        )
-
-//                0 -> {
-//                    NewProductFragment()
-//                }
-//                1 -> {
-//                    ZhuangRongDetailFragment()
-//                }
-//                list.size - 3 -> {
-//                    CzProductDetailFragment()
-//                }
-//                list.size - 2 -> {
-//                    ZhuangRongFragment()
-//                }
-//                list.size - 1 -> {
-//                    AboutFragment()
-//                }
