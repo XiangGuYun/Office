@@ -5,7 +5,7 @@
     android:background="#000000"
     android:orientation="vertical">
 
-    <FrameLayout
+    <com.yp.baselib.utils.view.NoScrollViewPager
         android:id="@+id/flContainerPD"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="20dp"

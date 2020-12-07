@@ -30,7 +30,8 @@ class ProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
         }
     }
 
-    override fun init() {
+    override fun onLazyInitView(savedInstanceState: Bundle?) {
+        super.onLazyInitView(savedInstanceState)
         val imgUrls = arguments!!.getString("imgUrls")
 
         imgUrls?.logD("gsdgsdgjryjth")
@@ -63,6 +64,10 @@ class ProductGalleryFragment : BaseFragment(), RVInterface, BmpUtils {
                 indicator.setDotNumber(imgUrlList.size).bindViewPager(vpGallery)
             }
         }
+    }
+
+    override fun init() {
+
     }
 
 

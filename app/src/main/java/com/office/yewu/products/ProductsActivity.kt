@@ -31,9 +31,9 @@ import org.greenrobot.eventbus.Subscribe
 class ProductsActivity : OfficeBaseActivity(), RVInterface {
 
     private var selectedIndex: Int = 0
-    private lateinit var productsDetailFragment: CzProductDetailFragment
-    private lateinit var zrDetailFragment: ZhuangRongDetailFragment
-    private lateinit var zrDetailFragmentNew: NewZhuangRongDetailFragment
+    private var productsDetailFragment: CzProductDetailFragment? =null
+    private var zrDetailFragment: ZhuangRongDetailFragment?= null
+    private var zrDetailFragmentNew: NewZhuangRongDetailFragment? = null
     lateinit var fu: FragmentUtils<BaseFragment>
     var isDetailPage = false
     var isDetailFragmentShowing = false
@@ -61,51 +61,51 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
                     msg.arg2 == 6 -> {
                         zrDetailFragmentNew =
                             NewZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
-                        fu.switchFragmentWithStack(zrDetailFragmentNew)
+                        fu.switchFragmentWithStack(zrDetailFragmentNew!!)
                         isZrDetailFragmentNewInFront = true
                     }
                     type == "Products" || isDetailPage -> {
                         productsDetailFragment =
                             CzProductDetailFragment.newInstance(msg.obj.toString().toInt())
-                        fu.switchFragmentWithStack(productsDetailFragment)
+                        fu.switchFragmentWithStack(productsDetailFragment!!)
                     }
                     else -> {
                         zrDetailFragment =
                             ZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
-                        fu.switchFragmentWithStack(zrDetailFragment)
+                        fu.switchFragmentWithStack(zrDetailFragment!!)
                     }
                 }
             }
             0x1234 ->{
                 productsDetailFragment = CzProductDetailFragment.newInstance(
                     msg.arg1, true)
-                fu.switchFragmentWithStack(productsDetailFragment)
+                fu.switchFragmentWithStack(productsDetailFragment!!)
                 isDetailFragmentShowing = true
             }
             0x1235 ->{
                 zrDetailFragment =
                     ZhuangRongDetailFragment.newInstance(msg.obj.toString().toInt())
-                fu.switchFragmentWithStack(zrDetailFragment)
+                fu.switchFragmentWithStack(zrDetailFragment!!)
             }
         }
     }
 
     override fun onBackPressedSupport() {
         if(isZrDetailFragmentNewInFront){
-            zrDetailFragmentNew.pop()
+            zrDetailFragmentNew?.pop()
             isZrDetailFragmentNewInFront = false
             return
         }
         if(isDetailFragmentShowing){
             isDetailFragmentShowing = false
-            productsDetailFragment.pop()
+            productsDetailFragment?.pop()
         } else {
             if (showRightDetailFragment) {
                 showRightDetailFragment = false
                 if (type == "Products" || isDetailPage) {
-                    productsDetailFragment.pop()
+                    productsDetailFragment?.pop()
                 } else {
-                    zrDetailFragment.pop()
+                    zrDetailFragment?.pop()
                 }
             } else {
                 super.onBackPressedSupport()
@@ -126,9 +126,9 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
             if (showRightDetailFragment) {
                 showRightDetailFragment = false
                 if (type == "Products" || isDetailPage) {
-                    productsDetailFragment.pop()
+                    productsDetailFragment?.pop()
                 } else {
-                    zrDetailFragment.pop()
+                    zrDetailFragment?.pop()
                 }
                 fu.switch(selectedIndex)
             } else {
@@ -251,18 +251,18 @@ class ProductsActivity : OfficeBaseActivity(), RVInterface {
                     rvLeft.update()
                     if(isZrDetailFragmentNewInFront){
                         isZrDetailFragmentNewInFront = false
-                        zrDetailFragmentNew.pop()
+                        zrDetailFragmentNew?.pop()
                     }
                     if(isDetailFragmentShowing){
                         isDetailFragmentShowing = false
-                        productsDetailFragment.pop()
+                        productsDetailFragment?.pop()
                     }
                     if (showRightDetailFragment) {
                         showRightDetailFragment = false
                         if (type == "Products") {
-                            productsDetailFragment.pop()
+                            productsDetailFragment?.pop()
                         } else {
-                            zrDetailFragment.pop()
+                            zrDetailFragment?.pop()
                         }
                     }
                     fu.switch(p)

@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -263,6 +264,7 @@ public class FragPagerUtils<T extends Fragment> {
 
         FragAdapter(FragmentManager fm, List<T> fragments) {
             super(fm);
+            Log.d("fafafa", fragments.size()+"=============");
             this.fragments = fragments;
         }
 
@@ -278,7 +280,6 @@ public class FragPagerUtils<T extends Fragment> {
 
         @Override
         public int getItemPosition(Object object) {
-            // TODO Auto-generated method stub
             return PagerAdapter.POSITION_NONE;
         }
 

@@ -1,14 +1,17 @@
 package com.office.yewu.product_detail
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.text.TextUtils
 import android.util.Log
+import android.widget.ImageView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.kotlinlib.common.LLLP
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.kotlinlib.view.textview.TextViewUtils
 import com.office.net.Req
+import com.office.view.Indicator
 import com.office.view.SwitchView
 import com.office.yewu.OfficeVideoActivity
 import com.office.yewu.products.ProductsActivity
@@ -19,7 +22,10 @@ import com.yp.baselib.utils.BusUtils
 import com.yp.baselib.utils.fragment.old.FragmentUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
+import kotlinx.android.synthetic.main.fragment_cz_pd.*
 import kotlinx.android.synthetic.main.fragment_zr_detail.*
+import kotlinx.android.synthetic.main.fragment_zr_detail.llXGSP
+import kotlinx.android.synthetic.main.fragment_zr_detail.rvVideo
 
 /**
  * 妆容详情
@@ -27,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_zr_detail.*
 @LayoutId(R.layout.fragment_zr_detail)
 class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextViewUtils {
 
-    private var fu: FragmentUtils<ProductGalleryFragment>? = null
+//    private var fu: FragmentUtils<ProductGalleryFragment>? = null
     private lateinit var arr: List<String>
 
     companion object {
@@ -68,17 +74,41 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextView
                 Log.d("gsdgsdgjryjth", "----"+it)
             }
 
-            fu = FragmentUtils(
-                getAct(),
-                ProductGalleryFragment.newInstance(
-                    appendStr(ArrayList(arr), ","){
-                        arr[it]
-                    },
-                    arguments!!.getBoolean("isAttachDetailActivity")
-                )
-                ,
-                R.id.flContainerPD1
-            )
+//            fu = FragmentUtils(
+//                getAct(),
+//                ProductGalleryFragment.newInstance(
+//                    appendStr(ArrayList(arr), ","){
+//                        arr[it]
+//                    },
+//                    arguments!!.getBoolean("isAttachDetailActivity")
+//                )
+//                ,
+//                R.id.flContainerPD1
+//            )
+
+            val imgs = ArrayList(arr)
+
+            flContainerPD1.setViewAdapter(1){ p->
+                getAct().inflate(R.layout.view_gallery).apply {
+                    this.view<ViewPager>(R.id.vpGallery).doLP<LLLP> {
+                        val size = if(!arguments!!.getBoolean("isAttachDetailActivity"))
+                            getAct().srnWidth - 140.dp - 20.dp
+                        else
+                            getAct().srnWidth - 40.dp
+                        it.width = size
+                        it.height = size
+                    }
+                    this.view<ViewPager>(R.id.vpGallery).setViewAdapter(imgs.size) { position: Int ->
+                        val view = getAct().inflate(R.layout.iv_gallery) as ImageView
+                        showBitmap(getAct(), view, imgs[position])
+                        view
+                    }
+
+                    if(imgs.size > 1){
+                        this.view<Indicator>(R.id.indicator).setDotNumber(imgs.size).bindViewPager(this.view<ViewPager>(R.id.vpGallery))
+                    }
+                }
+            }
 
             Req.getLinkProducts(it.data.id) {
                 if (it.data.isNotEmpty()) {
@@ -154,6 +184,7 @@ class ZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextView
                         }
                     }, R.layout.item_xgsp
                 )
+
             }
 
         }

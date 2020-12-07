@@ -1,13 +1,17 @@
 package com.office.yewu.product_detail
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.util.Log
+import android.widget.ImageView
 import com.kotlinlib.common.LLLP
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.office.constant.MsgWhat
 import com.office.net.Req
+import com.office.view.Indicator
 import com.office.yewu.OfficeVideoActivity
 import com.yp.baselib.BaseFragment
+import com.yp.baselib.FragPagerUtils
 import com.yp.baselib.LayoutId
 import com.yp.baselib.utils.BusUtils
 import com.yp.baselib.utils.fragment.old.FragmentUtils
@@ -17,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_cz_pd.*
 import kotlinx.android.synthetic.main.fragment_cz_pd.flContainerPD
 import kotlinx.android.synthetic.main.fragment_cz_pd.llXGSP
 import kotlinx.android.synthetic.main.fragment_cz_pd.rvVideo
+import kotlinx.android.synthetic.main.fragment_product_gallery.*
 import kotlinx.android.synthetic.main.fragment_zr_detail.*
 
 /**
@@ -24,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_zr_detail.*
  */
 @LayoutId(R.layout.fragment_cz_pd)
 class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
-    private var fu: FragmentUtils<ProductGalleryFragment>? = null
+    private var fu: FragPagerUtils<ProductGalleryFragment>? = null
 
     private val SINGLE_COLOR = 1
 
@@ -81,27 +86,53 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
             }
 
             if ( it.data.mallSkuDetailList.isNotEmpty()) {
-                fu = FragmentUtils<ProductGalleryFragment>(
-                    getAct(),
-                    ArrayList(it.data.mallSkuDetailList.map {
-                        ProductGalleryFragment.newInstance(
-                            it.productImg,
-                            arguments!!.getBoolean("isAttachDetailActivity")
-                        )
+                val list = it.data.mallSkuDetailList
+                flContainerPD.setViewAdapter(list.size){ p->
+                    getAct().inflate(R.layout.view_gallery).apply {
+                        this.view<ViewPager>(R.id.vpGallery).doLP<LLLP> {
+                            val size = if(!arguments!!.getBoolean("isAttachDetailActivity"))
+                                getAct().srnWidth - 140.dp - 20.dp
+                            else
+                                getAct().srnWidth - 40.dp
+                            it.width = size
+                            it.height = size
+                        }
+                        val imgs = list[p].productImg.split(",")
+                        this.view<ViewPager>(R.id.vpGallery).setViewAdapter(imgs.size) { position: Int ->
+                            val view = getAct().inflate(R.layout.iv_gallery) as ImageView
+                            showBitmap(getAct(), view, imgs[position])
+                            view
+                        }
+
+                        if(imgs.size > 1){
+                            this.view<Indicator>(R.id.indicator).setDotNumber(imgs.size).bindViewPager(this.view<ViewPager>(R.id.vpGallery))
+                        }
                     }
-                        .toList()),
-                    R.id.flContainerPD
-                )
+                }
             } else {
-                fu = FragmentUtils<ProductGalleryFragment>(
-                    getAct(),
-                    ProductGalleryFragment.newInstance(
-                        it.data.imgCover,
-                        arguments!!.getBoolean("isAttachDetailActivity")
-                    ),
-                    R.id.flContainerPD
-                )
-//                flContainerPD.gone()
+                val imgCover = it.data.imgCover
+                flContainerPD.setViewAdapter(1){ p->
+                    getAct().inflate(R.layout.view_gallery).apply {
+                        this.view<ViewPager>(R.id.vpGallery).doLP<LLLP> {
+                            val size = if(!arguments!!.getBoolean("isAttachDetailActivity"))
+                                getAct().srnWidth - 140.dp - 20.dp
+                            else
+                                getAct().srnWidth - 40.dp
+                            it.width = size
+                            it.height = size
+                        }
+                        val imgs = listOf(imgCover)
+                        this.view<ViewPager>(R.id.vpGallery).setViewAdapter(imgs.size) { position: Int ->
+                            val view = getAct().inflate(R.layout.iv_gallery) as ImageView
+                            showBitmap(getAct(), view, imgs[position])
+                            view
+                        }
+
+                        if(imgs.size > 1){
+                            this.view<Indicator>(R.id.indicator).setDotNumber(imgs.size).bindViewPager(this.view<ViewPager>(R.id.vpGallery))
+                        }
+                    }
+                }
             }
 
             var selectedIndex = 0
@@ -160,7 +191,7 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
                                     selectedIndex = pos
                                     rvColor.update()
                                     tvColor.text = list[pos].productModel
-                                    fu?.switch(pos)
+                                    flContainerPD.setCurrentItem(pos)
                                 }
                             }, R.layout.item_color
                         )
@@ -181,7 +212,7 @@ class CzProductDetailFragment : BaseFragment(), RVInterface, BmpUtils {
                                 holder.itemClick { v ->
                                     selectedIndex = pos
                                     tvColor.text = it.data.mallSkuDetailList[pos].productModel
-                                    fu?.switch(pos)
+                                    flContainerPD.setCurrentItem(pos)
                                     rvColor.update()
                                 }
                             }, R.layout.item_color_multi

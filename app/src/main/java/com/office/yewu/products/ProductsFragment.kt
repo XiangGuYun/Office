@@ -27,6 +27,8 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
 
     }
 
+    private var pageSize: Int = 0
+
     val list = ArrayList<ArrayList<ShangPinFenYeLieBiao.Data>>()
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
@@ -36,7 +38,7 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
         Req.getShangPinFenYeLieBiao(categoryId = if(id==-1) OK.OPTIONAL else id.toString()) {
             if(it.data == null) return@getShangPinFenYeLieBiao
             val itemSize = it.data.size
-            val pageSize = (itemSize + 3) / 4
+            pageSize = (itemSize + 3) / 4
 
             for (i in 0 until pageSize) {
                 list.add(ArrayList())
@@ -69,29 +71,30 @@ class ProductsFragment : BaseFragment(), RVInterface, BmpUtils {
                 view
             }
 
+            var whiteDotIndex = 0
+
+
+            if(pageSize > 1){
+                rvDots.wrap.managerHorizontal().rvMultiAdapter(
+                    list,
+                    { holder, pos ->
+
+                    },
+                    {
+                        if (whiteDotIndex == it) 0 else 1
+                    }, R.layout.item_dot_white, R.layout.item_dot_dark
+                )
+
+                vpDetail.setOnPageChangeListener(object : VpChangeListener {
+                    override fun onPageSelected(p0: Int) {
+                        whiteDotIndex = p0
+                        rvDots.update()
+                    }
+                })
+            }
+
+
         }
-
-        var whiteDotIndex = 0
-
-        if(list.size > 1){
-            rvDots.wrap.managerHorizontal().rvMultiAdapter(
-                list,
-                { holder, pos ->
-
-                },
-                {
-                    if (whiteDotIndex == it) 0 else 1
-                }, R.layout.item_dot_white, R.layout.item_dot_dark
-            )
-
-            vpDetail.setOnPageChangeListener(object : VpChangeListener {
-                override fun onPageSelected(p0: Int) {
-                    whiteDotIndex = p0
-                    rvDots.update()
-                }
-            })
-        }
-
 
     }
 

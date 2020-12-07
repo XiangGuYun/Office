@@ -1,14 +1,17 @@
 package com.office.yewu.product_detail
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.text.TextUtils
 import android.util.Log
+import android.widget.ImageView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.kotlinlib.common.LLLP
 import com.kotlinlib.common.bitmap.BmpUtils
 import com.kotlinlib.view.textview.TextViewUtils
 import com.office.net.Req
+import com.office.view.Indicator
 import com.office.view.SwitchView
 import com.office.yewu.OfficeVideoActivity
 import com.office.yewu.products.ProductsActivity
@@ -19,7 +22,15 @@ import com.yp.baselib.utils.BusUtils
 import com.yp.baselib.utils.fragment.old.FragmentUtils
 import com.yp.baselib.utils.view.recyclerview.RVInterface
 import com.yp.oom.R
+import kotlinx.android.synthetic.main.fragment_zr_detail.*
 import kotlinx.android.synthetic.main.fragment_zr_detail_new.*
+import kotlinx.android.synthetic.main.fragment_zr_detail_new.llXGSP
+import kotlinx.android.synthetic.main.fragment_zr_detail_new.rvRelationProducts
+import kotlinx.android.synthetic.main.fragment_zr_detail_new.rvSteps
+import kotlinx.android.synthetic.main.fragment_zr_detail_new.rvVideo
+import kotlinx.android.synthetic.main.fragment_zr_detail_new.titleBar2
+import kotlinx.android.synthetic.main.fragment_zr_detail_new.tvRelationProducts
+import kotlinx.android.synthetic.main.fragment_zr_detail_new.tvZrDesc
 
 /**
  * 妆容详情
@@ -71,17 +82,41 @@ class NewZhuangRongDetailFragment : BaseFragment(), RVInterface, BmpUtils, TextV
 
 //            "---------------${arr.size}".toast()
 
-            FragmentUtils(
-                getAct(),
-                ProductGalleryFragment.newInstance(
-                    appendStr(ArrayList(arr), ","){
-                        arr[it]
-                    },
-                    arguments!!.getBoolean("isAttachDetailActivity")
-                )
-                ,
-                R.id.flContainerPDNew
-            )
+//            FragmentUtils(
+//                getAct(),
+//                ProductGalleryFragment.newInstance(
+//                    appendStr(ArrayList(arr), ","){
+//                        arr[it]
+//                    },
+//                    arguments!!.getBoolean("isAttachDetailActivity")
+//                )
+//                ,
+//                R.id.flContainerPDNew
+//            )
+
+            val imgs = ArrayList(arr)
+
+            flContainerPDNew.setViewAdapter(1){ p->
+                getAct().inflate(R.layout.view_gallery).apply {
+                    this.view<ViewPager>(R.id.vpGallery).doLP<LLLP> {
+                        val size = if(!arguments!!.getBoolean("isAttachDetailActivity"))
+                            getAct().srnWidth - 140.dp - 20.dp
+                        else
+                            getAct().srnWidth - 40.dp
+                        it.width = size
+                        it.height = size
+                    }
+                    this.view<ViewPager>(R.id.vpGallery).setViewAdapter(imgs.size) { position: Int ->
+                        val view = getAct().inflate(R.layout.iv_gallery) as ImageView
+                        showBitmap(getAct(), view, imgs[position])
+                        view
+                    }
+
+                    if(imgs.size > 1){
+                        this.view<Indicator>(R.id.indicator).setDotNumber(imgs.size).bindViewPager(this.view<ViewPager>(R.id.vpGallery))
+                    }
+                }
+            }
 
             Req.getLinkProducts(it.data.id) {
                 if (it.data.isNotEmpty()) {
